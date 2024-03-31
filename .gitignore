@@ -1,1 +1,4 @@
 /home/.config/tmux/plugins
+
+# python
+__pycache__
