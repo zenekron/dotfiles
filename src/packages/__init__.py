@@ -1,314 +1,151 @@
+from __future__ import annotations
+from dataclasses import dataclass
+import itertools
 import os
-
-from packages.package import Package, packages
-
-
-CURRENT_USER = os.environ["USER"]
+import subprocess
+from typing import Iterable
 
 
-PACKAGE_LIST: set[Package] = set()
-
-# core
-PACKAGE_LIST |= packages(
-    {
-        "base",
-        "base-devel",
-        # system
-        "amd-ucode",
-        "btrfs-progs",
-        "efibootmgr",
-        "linux-firmware",
-        "linux-lts",
-        "man-db",
-        "man-pages",
-        "nfs-utils",
-        "openssh",
-        "pacman-contrib",
-        "sshfs",
-        Package("reflector", services={"reflector.timer"}),
-        Package("xdg-user-dirs", scripts=['cd "$HOME" && xdg-user-dirs-update']),
-        # shell
-        "starship",
-        Package(
-            "zsh",
-            scripts=[
-                f"""
-                    if [[ "$SHELL" != "/bin/zsh" ]]; then
-                        chsh -s "/bin/zsh" "{CURRENT_USER}"
-                    fi
-                """,
-            ],
-        ),
-        "zsh-autosuggestions",
-        "zsh-completions",
-        "zsh-history-substring-search",
-        "zsh-syntax-highlighting",
-        # cli
-        Package(
-            "bat",
-            scripts=["bat cache --source ~/.dotfiles/modules/catppuccin/bat --build"],
-        ),
-        "bc",
-        "bottom",
-        "btop",
-        "downgrade",
-        "duf",
-        "dust",
-        "eza",
-        "fd",
-        "ffmpeg",
-        "fzf",
-        "gallery-dl-bin",
-        "gping",
-        "gptfdisk",
-        "htop",
-        "ipcalc",
-        "jq",
-        "p7zip",
-        "paru-bin",
-        "procs",
-        "ranger",
-        "renameutils",
-        "ripgrep",
-        "rsync",
-        "sd",
-        "tealdeer",
-        "tmux",
-        "tmuxinator",
-        "ventoy-bin",
-        "wget",
-        # fonts
-        "ttf-fira-code",
-        "ttf-firacode-nerd",
-        "ttf-font-awesome",
-        "ttf-jetbrains-mono",
-        "ttf-jetbrains-mono-nerd",
-        # misc
-        "packwiz-git",
-    }
-)
-
-# wayland
-PACKAGE_LIST |= packages(
-    {
-        "glfw-wayland",
-        "qt5-wayland",
-        "qt6-wayland",
-        # hyprland
-        Package(
-            "hyprland",
-            dependencies={"hyprpaper"},
-        ),
-        # sway
-        Package(
-            "sway",
-            dependencies={
-                "noto-fonts",
-                "polkit",  # polkit is required by other PACKAGE_LIST anyway
-                "swaybg",
-                "swaylock",
-                "xorg-xwayland",
-            },
-        ),
-        "wofi",  # application launcher
-        "waybar",  # status bar
-        # terminal emulator
-        "foot",
-        "wezterm",
-        # audio
-        Package(
-            "pipewire",
-            dependencies={
-                "pipewire-alsa",
-                "pipewire-audio",
-                "pipewire-jack",
-                "pipewire-pulse",
-            },
-        ),
-        "pipewire-docs",
-        "wireplumber",
-        # gui
-        "feh",
-        "firefox",
-        "nemo",
-        "nemo-share",
-        "thunderbird",
-        "udiskie",
-        "vlc",
-        Package("okular", dependencies={"phonon-qt5-gstreamer"}),
-        # cli
-        "clipman",  # clipboard manager
-        "grim",  # screenshot utility
-        "slurp",  # region selection
-        "wf-recorder",
-        "wl-clipboard",  # clipboard integration
-    }
-)
-
-# development
-PACKAGE_LIST |= packages(
-    {
-        # git
-        "git",
-        "git-cliff",
-        "git-delta",
-        "git-lfs",
-        # neovim
-        Package("neovim", dependencies={"python-pynvim"}),
-        # cli
-        "aws-cli-v2",
-        "ctags",  # indexes language objects in source files
-        "direnv",
-        "entr",
-        "hyperfine",  # benchmarking tool
-        "lldb",  # LLVM debugger
-        "mitmproxy",  # man-in-the-middle HTTP(S) proxy
-        "mold",  # modern linker
-        "sccache",  # compilation cache
-        "tailspin",  # log file viewer
-        "valgrind",  # memory checker
-        Package(
-            "nix",
-            groups={"nix-users"},
-            services={"nix-daemon.service"},
-            scripts=[
-                "nix-channel --add 'https://nixos.org/channels/nixpkgs-unstable' && nix-channel --update",
-            ],
-        ),
-        # gui
-        "lunacy-bin",  # free UI/UX design software
-        "insomnia-bin",  # API client and design platform for Graphql and REST
-        # docker
-        "dive",
-        "docker-compose",
-        Package(
-            "docker",
-            dependencies={"docker-buildx"},
-            services={"docker.service"},
-            groups={"docker"},
-        ),
-        # kubernetes
-        "helm",
-        "k9s",
-        "kubectl",
-    }
-)
+_CURRENT_USER = os.environ["USER"]
 
 
-# development/languages
-PACKAGE_LIST |= packages(
-    {
-        "codelldb-bin",
-        "pulumi",
-        # ansible
-        "ansible",
-        "ansible-language-server",
-        "ansible-lint",
-        # c/c++
-        "checkmake",
-        "cmake",
-        "cmake-format",
-        "cppcheck",
-        "include-what-you-use",
-        "ninja",
-        "python-cpplint",
-        # css
-        "vscode-css-languageserver",
-        # go
-        "gopls",
-        # html
-        "vscode-html-languageserver",
-        # java
-        "gradle",
-        "gradle-doc",
-        "gradle-src",
-        "jdk-openjdk",
-        "jdk8-openjdk",
-        "jdk11-openjdk",
-        "jdk17-openjdk",
-        "jdtls",
-        "maven",
-        "openjdk-doc",
-        "openjdk-src",
-        "openjdk8-doc",
-        "openjdk8-src",
-        "openjdk11-doc",
-        "openjdk11-src",
-        "openjdk17-doc",
-        "openjdk17-src",
-        # javascript/typescript
-        "eslint",
-        "nvm",
-        "pnpm",
-        "nodejs",
-        "prettier",
-        "typescript-language-server",
-        # json
-        "vscode-json-languageserver",
-        # lua
-        "lua-language-server",
-        # openscad
-        "openscad-git",
-        # python
-        "pyenv",
-        "pyright",
-        "python",
-        "python-poetry",
-        # powershell
-        "powershell-bin",
-        # rust
-        "cargo-edit",
-        "cargo-expand",
-        "cargo-feature",
-        "cargo-generate",
-        "cargo-msrv",
-        "cargo-outdated",
-        "cargo-release",
-        "cargo-tauri",
-        "cargo-udeps",
-        "cargo-update",
-        "cargo-watch",
-        "cross",
-        "rust-analyzer",
-        "rustup",
-        "wasm-bindgen",
-        "wasm-pack",
-        # shell
-        "bash-language-server",
-        "shellcheck",
-        # sql
-        "sqlfluff",
-        # svelte
-        "svelte-language-server",
-        # terraform
-        "opentofu-bin",
-        "terraform",
-        "terraform-ls",
-        "terragrunt",
-        "tflint-bin",
-        "tfsec-bin",
-        # tex/latex
-        "tectonic",
-        "texinfo",
-        "texlab",
-        # yaml
-        "yamllint",
-        # zig
-        "zig",
-    }
-)
+def packages(pkgs: Iterable[str | Package]) -> set[Package]:
+    return {pkg if isinstance(pkg, Package) else Package(name=pkg) for pkg in pkgs}
 
-# vmware
-with open("/proc/scsi/scsi", "r") as scsi:
-    for line in scsi.readlines():
-        if "vmware" in line.lower():
-            PACKAGE_LIST |= packages(
-                {
-                    "xf86-input-vmmouse",
-                    Package(
-                        name="open-vm-tools",
-                        dependencies={"fuse2"},
-                        services={"vmtoolsd.service", "vmware-vmblock-fuse.service"},
-                    ),
-                }
+
+def _get_present(pacman: str, explicit_only: bool) -> set[Package]:
+    args = [pacman, "-Q"]
+    if explicit_only:
+        args.append("--explicit")
+
+    proc = subprocess.run(args, capture_output=True, check=True, encoding="utf-8")
+
+    return packages(line.split(" ", maxsplit=1)[0] for line in proc.stdout.splitlines())
+
+
+@dataclass
+class Diff:
+    wanted_packages: set[Package]
+    missing_packages: set[Package]
+    missing_dependencies: set[Package]
+    extra_packages: set[Package]
+    # NOTE: we don't care about tracking "extra dependencies" as those are
+    # transparently installed by pacman and pacman itself provides a way to
+    # uninstall them.
+    pacman: str = "pacman"
+
+    @classmethod
+    def generate(cls, wanted: set[Package], pacman: str = "pacman") -> Diff:
+        wanted_deps = {x for xs in wanted for x in xs.dependencies} - wanted
+
+        present = _get_present(pacman, True)
+        present_deps = _get_present(pacman, False) - present
+
+        missing = wanted - present
+        # NOTE: if a dependency is explicitly installed, then we shouldn't mark it as missing
+        missing_deps = wanted_deps - present - present_deps
+
+        extra = present - wanted
+
+        return Diff(
+            wanted_packages=wanted,
+            missing_packages=missing,
+            missing_dependencies=missing_deps,
+            extra_packages=extra,
+        )
+
+    def apply(self) -> None:
+        # install dependencies
+        subprocess.run(
+            [self.pacman, "-S", "--needed", "--asdeps"]
+            + [pkg.name for pkg in self.missing_dependencies],
+            check=True,
+        )
+
+        # install packages
+        subprocess.run(
+            [self.pacman, "-S", "--needed", "--asexplicit"]
+            + [pkg.name for pkg in self.missing_packages],
+            check=True,
+        )
+
+        # run post-install hooks
+        for package in self.wanted_packages:
+            package.post_install()
+
+    def __str__(self) -> str:
+        return "\n".join(
+            itertools.chain(
+                ["Missing Packages"],
+                (f"- {pkg}" for pkg in sorted(self.missing_packages)),
+                ["\nMissing Dependencies"],
+                (f"- {pkg}" for pkg in sorted(self.missing_dependencies)),
+                ["\nExtra Packages"],
+                (f"- {pkg}" for pkg in sorted(self.extra_packages)),
             )
+        )
+
+
+class Package:
+    name: str
+    _dependencies: set[Package]
+    groups: set[str]
+    scripts: list[str]
+    services: set[str]
+
+    def __init__(
+        self,
+        name: str,
+        dependencies: set[str | Package] = set(),
+        groups: set[str] = set(),
+        scripts: list[str] = list(),
+        services: set[str] = set(),
+    ) -> None:
+        self.name = name
+        self._dependencies = packages(dependencies)
+        self.groups = groups
+        self.scripts = scripts
+        self.services = services
+
+    def __eq__(self, value: object) -> bool:
+        return isinstance(value, Package) and value.name == self.name
+
+    def __hash__(self) -> int:
+        return self.name.__hash__()
+
+    def __lt__(self, value: Package) -> bool:
+        return self.name.__lt__(value.name)
+
+    def __str__(self) -> str:
+        return self.name
+
+    @property
+    def dependencies(self) -> set[Package]:
+        return self._dependencies | {
+            x for xs in self._dependencies for x in xs.dependencies
+        }
+
+    def post_install(self) -> None:
+        for dep in self._dependencies:
+            dep.post_install()
+
+        scripts = list(self.scripts)
+        for group in self.groups:
+            scripts.append(
+                f"""
+                    if ! groups '{_CURRENT_USER}' | grep '{group}' &>/dev/null; then
+                        sudo gpasswd -a '{_CURRENT_USER}' '{group}'
+                    fi
+                """
+            )
+
+        if self.services:
+            scripts.append(
+                "sudo systemctl enable --now "
+                + " ".join(f"'{service}'" for service in self.services)
+            )
+
+        if scripts:
+            script = "\n\n".join(["set -euo pipefail"] + scripts)
+            print(f"  - {self.name}")
+            subprocess.run(["bash", "-c", script], check=True)
