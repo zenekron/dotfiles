@@ -22,3 +22,23 @@ use_java() {
 
     log_status "Successfully loaded Java $(java -version | head -n 1)"
 }
+
+# Usage: use nvm [version]
+#
+# Loads the specified node version using `nvm`, if the `nvm` command is not
+# available, it will try sourcing it at `NVM_SH` with a fallback to a default
+# location.
+use_nvm() {
+	# try to source nvm if not available
+	if ! has nvm; then
+		local nvm_sh="${NVM_SH:-/usr/share/nvm/init-nvm.sh}"
+		if ! [[ -e "$nvm_sh" ]]; then
+			log_error "Command \"nvm\" not available, either source it in your .bashrc or configure the \"NVM_SH\" environment variable."
+			return 1
+		fi
+
+		source "$nvm_sh"
+	fi
+
+	nvm use "$@"
+}
