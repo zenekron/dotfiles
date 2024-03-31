@@ -4,3 +4,6 @@
 [submodule "modules/catppuccin/foot"]
 	path = modules/catppuccin/foot
 	url = https://github.com/catppuccin/foot.git
+[submodule "modules/catppuccin/bat"]
+	path = modules/catppuccin/bat
+	url = https://github.com/catppuccin/bat.git
