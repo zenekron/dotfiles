@@ -7,3 +7,6 @@
 [submodule "modules/catppuccin/bat"]
 	path = modules/catppuccin/bat
 	url = https://github.com/catppuccin/bat.git
+[submodule "modules/b4b4r07/enhancd"]
+	path = modules/b4b4r07/enhancd
+	url = https://github.com/b4b4r07/enhancd.git

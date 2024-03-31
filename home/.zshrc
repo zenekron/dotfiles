@@ -1,0 +1,62 @@
+#!/usr/bin/env zsh
+# Used for setting the interactive shell configuration and executing commands,
+# will be read when starting an interactive shell.
+
+#======================================================================
+# plugins
+#======================================================================
+
+source "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+source "/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh" # must be loaded after `zsh-syntax-highlighting`
+
+source "/usr/share/nvm/init-nvm.sh"
+
+eval "$(direnv hook zsh)"
+eval "$(starship init zsh)"
+
+
+
+#======================================================================
+# misc
+#======================================================================
+
+source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
+
+
+### ssh agent - https://wiki.archlinux.org/title/SSH_keys#SSH_agents
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+	ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+	source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+
+
+
+#======================================================================
+# zsh
+#======================================================================
+
+# options - man zshoptions
+setopt HIST_IGNORE_DUPS
+setopt SHARE_HISTORY
+
+# completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select # navigate completion with arrows
+
+source "~/.dotfiles/modules/b4b4r07/enhancd/init.sh" # enhancd wants to be sourced after `compinit`
+
+
+
+#======================================================================
+# keybinds
+#======================================================================
+
+# zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
