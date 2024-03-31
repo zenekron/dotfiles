@@ -1,25 +1,29 @@
 import os
 from pathlib import Path
 
-from dotfiles import link_dir
+from dotfiles import Diff
 
 
-def _link_all(apply: bool = False) -> None:
-    src = Path(__file__).resolve().parent.parent.parent
-    dest = Path(os.environ["HOME"])
+src = Path(__file__).resolve().parent.parent.parent
+dest = Path(os.environ["HOME"])
 
-    home = src / "home"
-    link_dir(home, dest, apply=apply, exclude={".config", ".local"})
-    link_dir(home / ".config", dest / ".config", apply=apply)
-    link_dir(home / ".local" / "state", dest / ".local" / "state", apply=apply)
+home = src / "home"
 
+diff = (
+    Diff.builder()
+    .directory(home, dest, {".config", ".local"})
+    .directory(home / ".config", dest / ".config")
+    .directory(home / ".local" / "state", dest / ".local" / "state")
+    .build()
+)
 
-_link_all(apply=False)
-
+print(diff)
 print("")
 while True:
     answer = input("Would you like to apply these changes [y/N]: ").lower()
     if answer in {"y", "yes"}:
-        _link_all(apply=True)
+        diff.apply()
+        print(diff)
+        break
     elif answer in {"", "n", "no"}:
         break
