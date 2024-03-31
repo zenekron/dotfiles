@@ -1,3 +1,6 @@
 [submodule "modules/tmux-plugins/tpm"]
 	path = modules/tmux-plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
+[submodule "modules/catppuccin/foot"]
+	path = modules/catppuccin/foot
+	url = https://github.com/catppuccin/foot.git
