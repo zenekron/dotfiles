@@ -1,0 +1,187 @@
+# Assignment operators
+snippet op=             simple assignment `a = b`
+        $1& operator=(const $2& b);
+snippet op+=    addition assignment `a += b`
+        $1& operator+=(const $2& b);
+snippet oop+=   addition assignment `a += b`
+        $1& operator+=($1& a, const $2& b);
+snippet op-=    subtraction assignment `a -= b`
+        $1& operator-=(const $2& b);
+snippet oop-=   subtraction assignment `a -= b`
+        $1& operator-=($1& a, const $2& b);
+snippet op*=    multiplication assignment`a *= b`
+        $1& operator*=(const $2& b);
+snippet oop*=   multiplication assignment`a *= b`
+        $1& operator*=($1& a, const $2& b);
+snippet op/=    division assignment `a /= b`
+        $1& operator/=(const $2& b);
+snippet oop/=   division assignment `a /= b`
+        $1& operator/=($1& a, const $2& b);
+snippet op%=    modulo assignment `a %= b`
+        $1& operator%=(const $2& b);
+snippet oop%=   modulo assignment `a %= b`
+        $1& operator%=($1& a, const $2& b);
+snippet op&=    bitwise AND assignment `a &= b`
+        $1& operator&=(const $2& b);
+snippet oop&=   bitwise AND assignment `a -= b`
+        $1& operator&=($1& a, const $2& b);
+snippet op|=    bitwise OR assignment `a |= b`
+        $1& operator|=(const $2& b);
+snippet oop|=   bitwise OR assignment `a |= b`
+        $1& operator|=($1& a, const $2& b);
+snippet op^=    bitwise XOR assignment `a ^= b`
+        $1& operator^=(const $2& b);
+snippet oop^=   bitwise XOR assignment `a ^= b`
+        $1& operator^=($1& a, const $2& b);
+snippet op<<=   bitwise left shift assignment `a <<= b`
+        $1& operator<<=(const $2& b);
+snippet oop<<=  bitwise left shift assignment `a <<= b`
+        $1& operator<<=($1& a, const $2& b);
+snippet op>>=   bitwise right shift assignment `a >>= b`
+        $1& operator>>=(const $2& b);
+snippet oop>>=  bitwise right shift assignment `a >>= b`
+        $1& operator>>=($1& a, const $2& b);
+
+# Increment/decrement operators
+snippet op++    pre-increment `++a`
+        $1& operator++();
+snippet oop++   pre-increment `++a`
+        $1& operator++($1& a);
+snippet op--    pre-decrement `--a`
+        $1& operator--();
+snippet oop--   pre-decrement `--a`
+        $1& operator--($1& a);
+snippet op++    post-increment `a++`
+        $1 operator++(int);
+snippet oop++   post-increment `a++`
+        $1 operator++($1& a, int);
+snippet op--    post-decrement `a--`
+        $1 operator--(int);
+snippet oop--   post-decrement `a--`
+        $1 operator--($1& a, int);
+
+# Arithmetic operators
+snippet op+u    unary plus `+a`
+        $1 operator+() const;
+snippet oop+u   unary plus `+a`
+        $1 operator+(const $1 &a);
+snippet op-u    unary minus `-a`
+        $1 operator-() const;
+snippet oop-u   unary minus `-a`
+        $1 operator-(const $1 &a);
+snippet op+             addition `a + b`
+        $1 operator+(const $2 &b) const;
+snippet oop+    addition `a + b`
+        $1 operator+(const $1 &a, const $2 &b);
+snippet op-             subtraction `a - b`
+        $1 operator-(const $2 &b) const;
+snippet oop-    subtraction `a - b`
+        $1 operator-(const $1 &a, const $2 &b);
+snippet op*             multiplication `a * b`
+        $1 operator*(const $2 &b) const;
+snippet oop*    multiplication `a * b`
+        $1 operator*(const $1 &a, const $2 &b);
+snippet op/             division `a / b`
+        $1 operator/(const $2 &b) const;
+snippet oop/    division `a / b`
+        $1 operator/(const $1 &a, const $2 &b);
+snippet op%             modulo `a % b`
+        $1 operator%(const $2 &b) const;
+snippet oop%    modulo `a % b`
+        $1 operator%(const $1 &a, const $2 &b);
+snippet op~             bitwise NOT `~a`
+        $1 operator~() const;
+snippet oop~    bitwise NOT `~a`
+        $1 operator~(const $1 &a);
+snippet op&             bitwise AND `a & b`
+        $1 operator&(const $2 &b) const;
+snippet oop&    bitwise AND `a & b`
+        $1 operator&(const $1 &a, const $2 &b);
+snippet op|             bitwise OR`a | b`
+        $1 operator|(const $2 &b) const;
+snippet oop|    bitwise OR `a | b`
+        $1 operator|(const $1 &a, const $2 &b);
+snippet op^             bitwise XOR `a ^ b`
+        $1 operator^(const $2 &b) const;
+snippet oop^    bitwise XOR `a ^ b`
+        $1 operator^(const $1 &a, const $2 &b);
+snippet op<<    bitwise left shift `a << b`
+        $1 operator<<(const $2 &b) const;
+snippet oop<<   bitwise left shift `a << b`
+        $1 operator<<(const $1 &a, const $2 &b);
+snippet op>>    bitwise right shift `a >> b`
+        $1 operator>>(const $2 &b) const;
+snippet oop>>   bitwise right shift `a >> b`
+        $1 operator>>(const $1 &a, const $2 &b);
+
+# Logical operators
+snippet op!             negation `!a`
+        bool operator!() const;
+snippet oop!    negation `!a`
+        bool operator!(const $1 &a);
+snippet op&&    AND `a and b`, `a && b`
+        bool operator&&(const $2 &b) const;
+snippet oop&&   AND `a and b`, `a && b`
+        bool operator&&(const $1 &a, const $2 &b);
+snippet op||    inclusive OR `a or b`, `a || b`
+        bool operator||(const $2 &b) const;
+snippet oop||   inclusive OR `a or b`, `a || b`
+        bool operator||(const $1 &a, const $2 &b);
+
+# Comparison operators
+snippet op==    equal to `a == b`
+        bool operator==(const $2 &b) const;
+snippet oop==   equal to `a == b`
+        bool operator==(const $1 &a, const $2 &b);
+snippet op!=    not equal to `a != b`
+        bool operator!=(const $2 &b) const;
+snippet oop!=   not equal to `a != b`
+        bool operator!=(const $1 &a, const $2 &b);
+snippet op<             less than `a < b`
+        bool operator<(const $2 &b) const;
+snippet oop<    less than `a < b`
+        bool operator<(const $1 &a, const $2 &b);
+snippet op>             creater than `a > b`
+        bool operator>(const $2 &b) const;
+snippet oop>    creater than `a > b`
+        bool operator>(const $1 &a, const $2 &b);
+snippet op<=    less than or equal to `a <= b`
+        bool operator<=(const $2 &b) const;
+snippet oop<=   less than or equal to `a <= b`
+        bool operator<=(const $1 &a, const $2 &b);
+snippet op>=    greater than or equal to `a >= b`
+        bool operator>=(const $2 &b) const;
+snippet oop>=   greater than or equal to `a >= b`
+        bool operator>=(const $1 &a, const $2 &b);
+
+# Member access operators
+snippet op[]    subscript `a[b]`
+        $1& operator[]($2 b);
+snippet op*             indirection `*a`
+        $1& operator*();
+snippet oop*    indirection `*a`
+        $1& operator*($2 a);
+snippet op&             address-of `&a`
+        $1* operator&();
+snippet oop&    address-of `&a`
+        $1* operator&($2 a);
+snippet op->    member of pointer `a->b`
+        $1* operator->();
+snippet op->*   pointer to member of pointer `a->*b`
+        $1& operator->*($2 b);
+snippet oop->*  pointer to member of pointer `a->*b`
+        $1& operator->*($2 a, $3 b);
+
+# Other operators
+snippet op()    function call `a(...args)`
+        $1 operator()($2);
+snippet op,             comma `a, b`
+        $2& operator,($2 &b);
+snippet oop,    comma `a, b`
+        $2& operator,(const $1 &a, $2 &b);
+
+# Stream
+snippet op<<s   stream insertion `out << b`
+        friend std::ostream &operator<<(std::ostream &out, $1 const &b);
+snippet op>>s   stream extraction `in >>  b`
+        friend std::istream &operator>>(std::istream &in, $1 &b);
