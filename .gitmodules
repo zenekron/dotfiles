@@ -13,3 +13,6 @@
 [submodule "modules/catppuccin/hyprland"]
 	path = modules/catppuccin/hyprland
 	url = https://github.com/catppuccin/hyprland.git
+[submodule "modules/catppuccin/delta"]
+	path = modules/catppuccin/delta
+	url = https://github.com/catppuccin/delta.git
