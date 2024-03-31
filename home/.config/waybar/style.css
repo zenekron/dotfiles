@@ -1,0 +1,232 @@
+/*
+ * Wiki: https://github.com/Alexays/Waybar/wiki/Styling
+ * Default: https://github.com/Alexays/Waybar/blob/master/resources/style.css
+ */
+
+/*
+ * remove waybar's default style
+ */
+* {
+	all: unset;
+}
+
+/*
+ * nord colorscheme
+ */
+@define-color nord0 #2E3440;
+@define-color nord1 #3B4252;
+@define-color nord2 #434C5E;
+@define-color nord3 #4C566A;
+@define-color nord4 #D8DEE9;
+@define-color nord5 #E5E9F0;
+@define-color nord6 #ECEFF4;
+@define-color nord7 #8FBCBB;
+@define-color nord8 #88C0D0;
+@define-color nord9 #81A1C1;
+@define-color nord10 #5E81AC;
+@define-color nord11 #BF616A;
+@define-color nord12 #D08770;
+@define-color nord13 #EBCB8B;
+@define-color nord14 #A3BE8C;
+@define-color nord15 #B48EAD;
+
+@define-color foreground @nord4;
+@define-color background @nord0;
+
+@define-color red    @nord11;
+@define-color orange @nord12;
+@define-color yellow @nord13;
+@define-color green  @nord14;
+@define-color purple @nord15;
+
+#waybar {
+	font-family: JetBrainsMono Nerd Font;
+	font-size: 15px;
+
+	/* background-color: @background; */
+	color: @foreground;
+}
+
+/*
+ * Clock - https://github.com/Alexays/Waybar/wiki/Module:-Clock
+ */
+
+#clock {
+	background-color: @nord7;
+	color: @nord0;
+
+	border-radius: 8px;
+	padding: 6px 12px;
+}
+
+/*
+ * CPU - https://github.com/Alexays/Waybar/wiki/Module:-CPU
+ */
+
+#cpu {
+	background-color: @green;
+	color: @nord0;
+
+	border-radius: 8px;
+	padding: 6px 12px;
+}
+
+#cpu.state-warning {
+	background-color: @yellow;
+}
+
+#cpu.state-dangerous {
+	background-color: @orange;
+}
+
+#cpu.state-critical {
+	background-color: @red;
+}
+
+/*
+ * Memory - https://github.com/Alexays/Waybar/wiki/Module:-Memory
+ */
+
+#memory {
+	background-color: @green;
+	color: @nord0;
+
+	border-radius: 8px;
+	padding: 6px 12px;
+}
+
+#memory.state-warning {
+	background-color: @yellow;
+}
+
+#memory.state-dangerous {
+	background-color: @orange;
+}
+
+#memory.state-critical {
+	background-color: @red;
+}
+
+/*
+ * Network - https://github.com/Alexays/Waybar/wiki/Module:-Network
+ */
+
+#network {
+	border-radius: 8px;
+	padding: 6px 12px;
+}
+
+#network.disabled,
+#network.disconnected {
+	background-color: @red;
+	color: @nord0;
+}
+
+#network.linked {
+	background-color: @yellow;
+	color: @nord0;
+}
+
+#network.ethernet,
+#network.wifi {
+	background-color: @green;
+	color: @nord0;
+}
+
+/*
+ * Sway - https://github.com/Alexays/Waybar/wiki/Module:-Sway
+ */
+
+#mode {
+	background-color: @purple;
+	color: @nord0;
+	font-style: italic;
+
+	border-radius: 8px;
+	padding: 6px 12px;
+}
+
+#workspaces button {
+	background-color: @background;
+	padding: 6px 12px;
+
+	border-right: 1px solid @nord1;
+}
+
+#workspaces button:first-child {
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+#workspaces button:last-child {
+	border-right: unset; /* remove separation border */
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+#workspaces button:hover {
+	background-color: @nord1;
+}
+
+#workspaces button.visible {
+	background-color: @nord11;
+	color: @nord0;
+}
+
+#workspaces button.visible:hover {
+	background-color: @nord10;
+	color: @nord0;
+}
+
+#workspaces button.focused,
+#workspaces button.focused:hover {
+	background-color: @green;
+	color: @nord0;
+}
+
+#workspaces button.urgent {
+	background-color: @orange;
+	color: @nord0;
+}
+
+#workspaces button.urgent:hover {
+	background-color: @yellow;
+}
+
+#workspaces button.persistent,
+#workspaces button.persistent:hover {
+	background-color: @purple;
+	color: @nord0;
+}
+
+/* #workspaces button.current_output */
+/* #workspaces button#sway-workspace-${name} */
+
+/*
+ * Tray - https://github.com/Alexays/Waybar/wiki/Module:-Tray
+ */
+
+#tray {
+	background-color: @nord7;
+	color: @nord0;
+
+	border-radius: 8px;
+	padding: 6px 12px;
+}
+
+#tray menu {
+	background-color: @background;
+	color: @foreground;
+
+	border-radius: 8px 8px 0 0;
+	padding: 6px 12px;
+}
+
+/* #tray > .passive { */
+/* } */
+
+/* #tray > .active { */
+/* } */
+
+/* #tray > .needs-attention { */
+/* } */
