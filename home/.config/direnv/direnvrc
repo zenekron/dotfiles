@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Usage: use java <version>
+#
+# Loads the specified Java version into the environment.
+use_java() {
+	local version="$1"
+	if [[ -z "$version" ]]; then
+		log_error "You must specify a <version> parameter"
+		return 1
+	fi
+
+	local java_prefix="/usr/lib/jvm/java-${version}-openjdk"
+	if [[ ! -d "$java_prefix" ]]; then
+		log_error "Unable to find java version $version"
+		return 1
+	fi
+
+	export JAVA_HOME="$java_prefix"
+	PATH_add "$JAVA_HOME/bin"
+	PATH_add "$JAVA_HOME/jre/bin"
+
+    log_status "Successfully loaded Java $(java -version | head -n 1)"
+}
