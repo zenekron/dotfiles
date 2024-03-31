@@ -1,4 +1,12 @@
 /home/.config/tmux/plugins
 
+# pnpm
+/home/.local/state/pnpm/*
+!/home/.local/state/pnpm/global
+/home/.local/state/pnpm/global/*
+!/home/.local/state/pnpm/global/5
+/home/.local/state/pnpm/global/5/*
+!/home/.local/state/pnpm/global/5/package.json
+
 # python
 __pycache__
