@@ -10,3 +10,6 @@
 [submodule "modules/b4b4r07/enhancd"]
 	path = modules/b4b4r07/enhancd
 	url = https://github.com/b4b4r07/enhancd.git
+[submodule "modules/catppuccin/hyprland"]
+	path = modules/catppuccin/hyprland
+	url = https://github.com/catppuccin/hyprland.git
