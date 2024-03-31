@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from src.dotfiles import link_dir
+from dotfiles import link_dir
 
 
 def _link_all(apply: bool = False) -> None:

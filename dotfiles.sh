@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
-exec python -m "src.dotfiles" "$@"
+cd "$HOME/.dotfiles/src" || exit
+exec python -m "dotfiles" "$@"

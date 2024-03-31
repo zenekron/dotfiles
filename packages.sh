@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
-cd "./src" || exit
+cd "$HOME/.dotfiles/src" || exit
 exec python -m "packages" "$@"
