@@ -1,5 +1,3 @@
-/home/.config/tmux/plugins
-
 # pnpm
 /home/.local/state/pnpm/*
 !/home/.local/state/pnpm/global
@@ -10,3 +8,10 @@
 
 # python
 __pycache__
+
+# ssh
+/home/.ssh/**/id_*
+/home/.ssh/**/known_hosts*
+
+# tmux
+/home/.config/tmux/plugins
