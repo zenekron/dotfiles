@@ -47,7 +47,7 @@ setopt SHARE_HISTORY
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select # navigate completion with arrows
 
-source "~/.dotfiles/modules/b4b4r07/enhancd/init.sh" # enhancd wants to be sourced after `compinit`
+source "$HOME/.dotfiles/modules/b4b4r07/enhancd/init.sh" # enhancd wants to be sourced after `compinit`
 
 
 
