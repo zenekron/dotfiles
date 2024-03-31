@@ -1,0 +1,54 @@
+window {
+  margin: 0px;
+  border: 1px solid #3e4452;
+  background-color: #282c34;
+}
+
+#outer-box {
+  margin: 5px;
+  border: none;
+  background-color: #282c34;
+}
+
+#input {
+  margin: 5px;
+  border: none;
+  color: #abb2bf;
+  background-color: #2c323c;
+}
+
+#inner-box {
+  margin: 5px;
+  border: none;
+  background-color: #282c34;
+}
+
+#text {
+  margin: 5px;
+  border: none;
+  color: #abb2bf;
+}
+
+#entry:selected {
+  background-color: #2c323c;
+}
+
+/* background = #282C34 */
+/* black = #282C34 */
+/* blue = #61AFEF */
+/* comment_grey = #5C6370 */
+/* cursor_grey = #2C323C */
+/* cyan = #56B6C2 */
+/* dark_red = #BE5046 */
+/* dark_yellow = #D19A66 */
+/* foreground = #ABB2BF */
+/* green = #98C379 */
+/* gutter_fg_grey = #4B5263 */
+/* menu_grey = #3E4452 */
+/* purple = #C678DD */
+/* red = #E06C75 */
+/* special_grey = #3B4048 */
+/* vertsplit = #3E4452 */
+/* visual_grey = #3E4452 */
+/* white = #ABB2BF */
+/* yellow = #E5C07B */
