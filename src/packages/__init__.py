@@ -32,10 +32,10 @@ class Diff:
     # NOTE: we don't care about tracking "extra dependencies" as those are
     # transparently installed by pacman and pacman itself provides a way to
     # uninstall them.
-    pacman: str = "pacman"
+    pacman: str
 
     @classmethod
-    def generate(cls, wanted: set[Package], pacman: str = "pacman") -> Diff:
+    def generate(cls, wanted: set[Package], pacman: str) -> Diff:
         wanted_deps = {x for xs in wanted for x in xs.dependencies} - wanted
 
         present = _get_present(pacman, True)
@@ -52,6 +52,7 @@ class Diff:
             missing_packages=missing,
             missing_dependencies=missing_deps,
             extra_packages=extra,
+            pacman=pacman,
         )
 
     def apply(self) -> None:
