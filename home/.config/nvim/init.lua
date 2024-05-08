@@ -109,6 +109,7 @@ vim.keymap.set("n", "<M-l>", "<cmd>vertical resize +2<cr>", { noremap = true, si
 -- tab navigation
 vim.keymap.set("n", "<leader><Tab>", "<cmd>tabnext<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader><S-Tab>", "<cmd>tabNext<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tq", "<cmd>tabclose<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>1", "1gt", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>2", "2gt", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>3", "3gt", { noremap = true, silent = true })
