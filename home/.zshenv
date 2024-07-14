@@ -65,3 +65,6 @@ path+=($PNPM_HOME)
 # rust
 export RUSTC_WRAPPER="sccache"
 path+=($HOME/.cargo/bin) # `cargo-install`-ed software
+
+# ssh
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
