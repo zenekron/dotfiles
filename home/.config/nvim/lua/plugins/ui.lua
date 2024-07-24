@@ -142,10 +142,10 @@ return {
         },
       }
 
-      local has_trouble, trouble = pcall(require, "trouble.providers.telescope")
+      local has_trouble, trouble = pcall(require, "trouble.sources.telescope")
       if has_trouble then
-        config.defaults.mappings.i["<C-s>"] = trouble.open_with_trouble
-        config.defaults.mappings.n["<C-s>"] = trouble.open_with_trouble
+        config.defaults.mappings.i["<C-s>"] = trouble.open
+        config.defaults.mappings.n["<C-s>"] = trouble.open
       end
 
       return config
