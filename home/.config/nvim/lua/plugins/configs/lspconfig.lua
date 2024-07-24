@@ -150,7 +150,6 @@ M.setup = function()
     openscad_lsp = {},
     powershell_es = powershell_es,
     pyright = {},
-    rust_analyzer = {},
     svelte = {},
     terraformls = {},
     tflint = {},

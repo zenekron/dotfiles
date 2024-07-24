@@ -30,9 +30,13 @@ return {
       -- https://sr.ht/~p00f/clangd_extensions.nvim
       { "https://git.sr.ht/~p00f/clangd_extensions.nvim", config = true },
 
-      -- A plugin to improve your rust experience in neovim.
-      -- https://github.com/simrat39/rust-tools.nvim
-      { "simrat39/rust-tools.nvim",                       config = true },
+      -- Supercharge your Rust experience in Neovim!
+      -- https://github.com/mrcjkb/rustaceanvim
+      {
+        "mrcjkb/rustaceanvim",
+        version = "^4",
+        lazy = false,
+      },
     },
     config = require("plugins.configs.lspconfig").setup
   },
