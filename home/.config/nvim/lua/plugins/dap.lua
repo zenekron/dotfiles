@@ -62,6 +62,10 @@ return {
       -- Debug Adapter Protocol client implementation for Neovim
       -- https://github.com/mfussenegger/nvim-dap
       "mfussenegger/nvim-dap",
+
+      -- A library for asynchronous IO in Neovim
+      -- https://github.com/nvim-neotest/nvim-nio
+      "nvim-neotest/nvim-nio",
     },
     lazy = true,
     config = function(_)
