@@ -281,8 +281,7 @@ PACKAGE_LIST |= packages(
         # svelte
         "svelte-language-server",
         # terraform
-        "opentofu-bin",
-        "terraform",
+        "opentofu",
         "terraform-ls",
         "terragrunt",
         "tflint-bin",
@@ -305,6 +304,7 @@ with open("/proc/scsi/scsi", "r") as scsi:
             PACKAGE_LIST |= packages(
                 {
                     "xf86-input-vmmouse",
+                    "xf86-video-vmware",
                     Package(
                         name="open-vm-tools",
                         dependencies={"fuse2"},
