@@ -14,7 +14,7 @@ alias xp="wl-paste"
 # git
 alias g="git"
 alias ga="git add"
-alias gaf="git fzf add"
+alias gaf="git fzf-add"
 alias gap="git add --patch"
 alias gb="git branch"
 alias gba="git branch --all --verbose"

@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+git status -uall --porcelain=v1 |\
+	fzf --multi |\
+	sd '^.{3}' '' |\
+	xargs git add --
