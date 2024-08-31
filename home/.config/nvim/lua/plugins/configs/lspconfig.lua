@@ -1,5 +1,20 @@
 local M = {}
 
+vim.g.rustaceanvim = {
+  server = {
+    default_settings = {
+      ["rust-analyzer"] = {
+        imports = {
+          prefix = "self",
+          granularity = {
+            enforce = true,
+          },
+        },
+      },
+    },
+  },
+}
+
 M.setup = function()
   local lspconfig = require("lspconfig")
   local mason = require("mason-core.package")
