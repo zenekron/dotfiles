@@ -128,18 +128,29 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     local bufnr = vim.api.nvim_get_current_buf()
     local bufft = vim.bo[bufnr].filetype
 
-    -- check if formatter.nvim is available
-    local ok, util = pcall(require, "formatter.util")
-    if ok == true then
-      local available = util.get_available_formatters_for_ft(bufft)
-      if #available > 0 then
-        vim.api.nvim_exec2("FormatWriteLock", {})
-        return
+    local skip_formatter_nvim = false
+
+    local active_clients = vim.lsp.get_clients({ bufnr = bufnr })
+    for i, client in pairs(active_clients) do
+      if client.name == "biome" then
+        skip_formatter_nvim = true
+        break
+      end
+    end
+
+    if not skip_formatter_nvim then
+      -- check if formatter.nvim is available
+      local ok, util = pcall(require, "formatter.util")
+      if ok == true then
+        local available = util.get_available_formatters_for_ft(bufft)
+        if #available > 0 then
+          vim.api.nvim_exec2("FormatWriteLock", {})
+          return
+        end
       end
     end
 
     -- check if there is an LSP server available
-    local active_clients = vim.lsp.get_active_clients({ bufnr = bufnr })
     if #active_clients > 0 then
       vim.lsp.buf.format()
     end

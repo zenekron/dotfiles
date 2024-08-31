@@ -98,6 +98,9 @@ M.setup = function()
   }
 
   local jsonls = {
+    init_options = {
+      provideFormatter = false,
+    },
     settings = {
       json = {
         schemas = schemastore.json.schemas(),
@@ -134,6 +137,7 @@ M.setup = function()
     -- emmet_ls = {},
     ansiblels = {},
     bashls = {},
+    biome = {},
     bufls = {},
     clangd = clangd,
     cssls = {},
@@ -153,7 +157,12 @@ M.setup = function()
     svelte = {},
     terraformls = {},
     tflint = {},
-    tsserver = {},
+    tsserver = {
+      on_attach = function(client)
+        -- we either format using biome or formatter.nvim+prettier
+        client.server_capabilities.documentFormattingProvider = false
+      end
+    },
   }
 
   for name, options in pairs(server_options) do
