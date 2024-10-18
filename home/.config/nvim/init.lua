@@ -84,6 +84,16 @@ vim.o.termguicolors = true
 -- Keys
 --
 
+local format = require(".format")
+vim.keymap.set("n", "<leader>fa", format.toggle_format, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>fb", format.toggle_format_buf, { noremap = true, silent = true })
+
+
+
+--
+-- Keys
+--
+
 -- switch back and forth between buffers
 vim.keymap.set("n", "<leader><leader>", "<c-^>")
 
@@ -119,45 +129,6 @@ vim.keymap.set("n", "<leader>6", "6gt", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>7", "7gt", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>8", "8gt", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>9", "9gt", { noremap = true, silent = true })
-
-
--- format on save
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "*" },
-  callback = function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local bufft = vim.bo[bufnr].filetype
-
-    local skip_formatter_nvim = false
-
-    local active_clients = vim.lsp.get_clients({ bufnr = bufnr })
-    for i, client in pairs(active_clients) do
-      if client.name == "biome" then
-        skip_formatter_nvim = true
-        break
-      end
-    end
-
-    if not skip_formatter_nvim then
-      -- check if formatter.nvim is available
-      local ok, util = pcall(require, "formatter.util")
-      if ok == true then
-        local available = util.get_available_formatters_for_ft(bufft)
-        if #available > 0 then
-          vim.api.nvim_exec2("FormatWriteLock", {})
-          return
-        end
-      end
-    end
-
-    -- check if there is an LSP server available
-    if #active_clients > 0 then
-      vim.lsp.buf.format()
-    end
-
-    -- formatting not available
-  end
-})
 
 -- filetypes
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
