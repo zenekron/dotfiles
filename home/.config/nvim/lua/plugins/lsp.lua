@@ -65,9 +65,8 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     keys = {
-      { "<leader>d",  "<cmd>TroubleToggle<cr>" },
-      { "<leader>tw", "<cmd>Trouble workspace_diagnostics<cr>" },
-      { "<leader>td", "<cmd>Trouble document_diagnostics<cr>" },
+      { "<leader>tt",  "<cmd>TroubleToggle<cr>" },
+      { "<leader>td", "<cmd>Trouble diagnostics<cr>" },
       { "gd",         "<cmd>Trouble lsp_definitions<cr>" },
       { "gy",         "<cmd>Trouble lsp_type_definitions<cr>" },
       { "gr",         "<cmd>Trouble lsp_references<cr>" },
