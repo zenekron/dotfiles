@@ -1,187 +1,243 @@
-# Assignment operators
-snippet op=             simple assignment `a = b`
-        $1& operator=(const $2& b);
-snippet op+=    addition assignment `a += b`
-        $1& operator+=(const $2& b);
-snippet oop+=   addition assignment `a += b`
-        $1& operator+=($1& a, const $2& b);
-snippet op-=    subtraction assignment `a -= b`
-        $1& operator-=(const $2& b);
-snippet oop-=   subtraction assignment `a -= b`
-        $1& operator-=($1& a, const $2& b);
-snippet op*=    multiplication assignment`a *= b`
-        $1& operator*=(const $2& b);
-snippet oop*=   multiplication assignment`a *= b`
-        $1& operator*=($1& a, const $2& b);
-snippet op/=    division assignment `a /= b`
-        $1& operator/=(const $2& b);
-snippet oop/=   division assignment `a /= b`
-        $1& operator/=($1& a, const $2& b);
-snippet op%=    modulo assignment `a %= b`
-        $1& operator%=(const $2& b);
-snippet oop%=   modulo assignment `a %= b`
-        $1& operator%=($1& a, const $2& b);
-snippet op&=    bitwise AND assignment `a &= b`
-        $1& operator&=(const $2& b);
-snippet oop&=   bitwise AND assignment `a -= b`
-        $1& operator&=($1& a, const $2& b);
-snippet op|=    bitwise OR assignment `a |= b`
-        $1& operator|=(const $2& b);
-snippet oop|=   bitwise OR assignment `a |= b`
-        $1& operator|=($1& a, const $2& b);
-snippet op^=    bitwise XOR assignment `a ^= b`
-        $1& operator^=(const $2& b);
-snippet oop^=   bitwise XOR assignment `a ^= b`
-        $1& operator^=($1& a, const $2& b);
-snippet op<<=   bitwise left shift assignment `a <<= b`
-        $1& operator<<=(const $2& b);
-snippet oop<<=  bitwise left shift assignment `a <<= b`
-        $1& operator<<=($1& a, const $2& b);
-snippet op>>=   bitwise right shift assignment `a >>= b`
-        $1& operator>>=(const $2& b);
-snippet oop>>=  bitwise right shift assignment `a >>= b`
-        $1& operator>>=($1& a, const $2& b);
+# vim: nofoldenable
 
-# Increment/decrement operators
-snippet op++    pre-increment `++a`
-        $1& operator++();
-snippet oop++   pre-increment `++a`
-        $1& operator++($1& a);
-snippet op--    pre-decrement `--a`
-        $1& operator--();
-snippet oop--   pre-decrement `--a`
-        $1& operator--($1& a);
-snippet op++    post-increment `a++`
-        $1 operator++(int);
-snippet oop++   post-increment `a++`
-        $1 operator++($1& a, int);
-snippet op--    post-decrement `a--`
-        $1 operator--(int);
-snippet oop--   post-decrement `a--`
-        $1 operator--($1& a, int);
+#
+# operators - https://en.cppreference.com/w/cpp/language/operators
+#
 
-# Arithmetic operators
-snippet op+u    unary plus `+a`
-        $1 operator+() const;
-snippet oop+u   unary plus `+a`
-        $1 operator+(const $1 &a);
-snippet op-u    unary minus `-a`
-        $1 operator-() const;
-snippet oop-u   unary minus `-a`
-        $1 operator-(const $1 &a);
-snippet op+             addition `a + b`
-        $1 operator+(const $2 &b) const;
-snippet oop+    addition `a + b`
-        $1 operator+(const $1 &a, const $2 &b);
-snippet op-             subtraction `a - b`
-        $1 operator-(const $2 &b) const;
-snippet oop-    subtraction `a - b`
-        $1 operator-(const $1 &a, const $2 &b);
-snippet op*             multiplication `a * b`
-        $1 operator*(const $2 &b) const;
-snippet oop*    multiplication `a * b`
-        $1 operator*(const $1 &a, const $2 &b);
-snippet op/             division `a / b`
-        $1 operator/(const $2 &b) const;
-snippet oop/    division `a / b`
-        $1 operator/(const $1 &a, const $2 &b);
-snippet op%             modulo `a % b`
-        $1 operator%(const $2 &b) const;
-snippet oop%    modulo `a % b`
-        $1 operator%(const $1 &a, const $2 &b);
-snippet op~             bitwise NOT `~a`
-        $1 operator~() const;
-snippet oop~    bitwise NOT `~a`
-        $1 operator~(const $1 &a);
-snippet op&             bitwise AND `a & b`
-        $1 operator&(const $2 &b) const;
-snippet oop&    bitwise AND `a & b`
-        $1 operator&(const $1 &a, const $2 &b);
-snippet op|             bitwise OR`a | b`
-        $1 operator|(const $2 &b) const;
-snippet oop|    bitwise OR `a | b`
-        $1 operator|(const $1 &a, const $2 &b);
-snippet op^             bitwise XOR `a ^ b`
-        $1 operator^(const $2 &b) const;
-snippet oop^    bitwise XOR `a ^ b`
-        $1 operator^(const $1 &a, const $2 &b);
-snippet op<<    bitwise left shift `a << b`
-        $1 operator<<(const $2 &b) const;
-snippet oop<<   bitwise left shift `a << b`
-        $1 operator<<(const $1 &a, const $2 &b);
-snippet op>>    bitwise right shift `a >> b`
-        $1 operator>>(const $2 &b) const;
-snippet oop>>   bitwise right shift `a >> b`
-        $1 operator>>(const $1 &a, const $2 &b);
+# assignment - https://en.cppreference.com/w/cpp/language/operator_assignment
+snippet op=i simple assignment `a = b` (inside class)
+	inline ${1:T}& operator =(const ${3:U}& ${4:b}) { $9 }
+snippet op+=i addition assignment `a += b` (inside class)
+	inline ${1:T}& operator +=(const ${3:U}& ${4:b}) { $9 }
+snippet op+=o addition assignment `a += b` (outside class)
+	${1:T}& operator +=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op-=i subtraction assignment `a -= b` (inside class)
+	inline ${1:T}& operator -=(const ${3:U}& ${4:b}) { $9 }
+snippet op-=o subtraction assignment `a -= b` (outside class)
+	${1:T}& operator -=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op*=i multiplication assignment `a *= b` (inside class)
+	inline ${1:T}& operator *=(const ${3:U}& ${4:b}) { $9 }
+snippet op*=o multiplication assignment `a *= b` (outside class)
+	${1:T}& operator *=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op/=i division assignment `a /= b` (inside class)
+	inline ${1:T}& operator /=(const ${3:U}& ${4:b}) { $9 }
+snippet op/=o division assignment `a /= b` (outside class)
+	${1:T}& operator /=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op%=i remainder assignment `a %= b` (inside class)
+	inline ${1:T}& operator %=(const ${3:U}& ${4:b}) { $9 }
+snippet op%=o remainder assignment `a %= b` (outside class)
+	${1:T}& operator %=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op&=i bitwise AND assignment `a &= b` (inside class)
+	inline ${1:T}& operator &=(const ${3:U}& ${4:b}) { $9 }
+snippet op&=o bitwise AND assignment `a &= b` (outside class)
+	${1:T}& operator &=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op|=i bitwise OR assignment `a |= b` (inside class)
+	inline ${1:T}& operator |=(const ${3:U}& ${4:b}) { $9 }
+snippet op|=o bitwise OR assignment `a |= b` (outside class)
+	${1:T}& operator |=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op^=i bitwise XOR assignment `a ^= b` (inside class)
+	inline ${1:T}& operator ^=(const ${3:U}& ${4:b}) { $9 }
+snippet op^=o bitwise XOR assignment `a ^= b` (outside class)
+	${1:T}& operator ^=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op<<=i bitwise left shift assignment `a <<= b` (inside class)
+	inline ${1:T}& operator <<=(const ${3:U}& ${4:b}) { $9 }
+snippet op<<=o bitwise left shift assignment `a <<= b` (outside class)
+	${1:T}& operator <<=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op>>=i bitwise right shift assignment `a >>= b` (inside class)
+	inline ${1:T}& operator >>=(const ${3:U}& ${4:b}) { $9 }
+snippet op>>=o bitwise right shift assignment `a >>= b` (outside class)
+	${1:T}& operator >>=($1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
 
-# Logical operators
-snippet op!             negation `!a`
-        bool operator!() const;
-snippet oop!    negation `!a`
-        bool operator!(const $1 &a);
-snippet op&&    AND `a and b`, `a && b`
-        bool operator&&(const $2 &b) const;
-snippet oop&&   AND `a and b`, `a && b`
-        bool operator&&(const $1 &a, const $2 &b);
-snippet op||    inclusive OR `a or b`, `a || b`
-        bool operator||(const $2 &b) const;
-snippet oop||   inclusive OR `a or b`, `a || b`
-        bool operator||(const $1 &a, const $2 &b);
+# increment/decrement - https://en.cppreference.com/w/cpp/language/operator_incdec
+snippet op++i pre-increment `++a` (inside class)
+	inline ${1:T}& operator++() { $9 }
+snippet op++o pre-increment `++a` (outside class)
+	${1:T}& operator++($1& ${2:a}) { $9 }
+snippet op--i pre-decrement `--a` (inside class)
+	inline ${1:T}& operator--() { $9 }
+snippet op--i pre-decrement `--a` (outside class)
+	${1:T}& operator--($1& ${2:a}) { $9 }
+snippet op++i post-increment `a++` (inside class)
+	inline ${1:T} operator++(int) { $9 }
+snippet op++o post-increment `a++` (outside class)
+	${1:T} operator++($1& ${2:a}, int) { $9 }
+snippet op--i post-decrement `a--` (inside class)
+	inline ${1:T} operator--(int) { $9 }
+snippet op--o post-decrement `a--` (outside class)
+	${1:T} operator--($1& ${2:a}, int) { $9 }
 
-# Comparison operators
-snippet op==    equal to `a == b`
-        bool operator==(const $2 &b) const;
-snippet oop==   equal to `a == b`
-        bool operator==(const $1 &a, const $2 &b);
-snippet op!=    not equal to `a != b`
-        bool operator!=(const $2 &b) const;
-snippet oop!=   not equal to `a != b`
-        bool operator!=(const $1 &a, const $2 &b);
-snippet op<             less than `a < b`
-        bool operator<(const $2 &b) const;
-snippet oop<    less than `a < b`
-        bool operator<(const $1 &a, const $2 &b);
-snippet op>             creater than `a > b`
-        bool operator>(const $2 &b) const;
-snippet oop>    creater than `a > b`
-        bool operator>(const $1 &a, const $2 &b);
-snippet op<=    less than or equal to `a <= b`
-        bool operator<=(const $2 &b) const;
-snippet oop<=   less than or equal to `a <= b`
-        bool operator<=(const $1 &a, const $2 &b);
-snippet op>=    greater than or equal to `a >= b`
-        bool operator>=(const $2 &b) const;
-snippet oop>=   greater than or equal to `a >= b`
-        bool operator>=(const $1 &a, const $2 &b);
+# arithmetic - https://en.cppreference.com/w/cpp/language/operator_arithmetic
+snippet op+i Unary plus `+a` (inside class)
+	inline ${1:T} operator+() const { $9 }
+snippet op+o Unary plus `+a` (outside class)
+	${1:T} operator+(const $1& ${2:a}) { $9 }
+snippet op-i Unary minus `-a` (inside class)
+	inline ${1:T} operator-() const { $9 }
+snippet op-o Unary minus `-a` (outside class)
+	${1:T} operator-(const $1& ${2:a}) { $9 }
+snippet op+i Addition `a + b` (inside class)
+	inline ${1:T} operator+(const ${3:U}& ${4:b}) const { $9 }
+snippet op+o Addition `a + b` (outside class)
+	${1:T} operator+(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op-i Subtraction `a - b` (inside class)
+	inline ${1:T} operator-(const ${3:U}& ${4:b}) const { $9 }
+snippet op-o Subtraction `a - b` (outside class)
+	${1:T} operator-(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op*i Multiplication `a * b` (inside class)
+	inline ${1:T} operator*(const ${3:U}& ${4:b}) const { $9 }
+snippet op*o Multiplication `a * b` (outside class)
+	${1:T} operator*(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op/i Division `a / b` (inside class)
+	inline ${1:T} operator/(const ${3:U}& ${4:b}) const { $9 }
+snippet op/o Division `a / b` (outside class)
+	${1:T} operator/(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op&i Remainder `a % b` (inside class)
+	inline ${1:T} operator%(const ${3:U}& ${4:b}) const { $9 }
+snippet op&o Remainder `a % b` (outside class)
+	${1:T} operator%(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op~i Bitwise NOT `~a` (inside class)
+	inline ${1:T} operator~() const { $9 }
+snippet op~o Bitwise NOT `~a` (outside class)
+	${1:T} operator~(const $1& ${2:a}) { $9 }
+snippet op&i Bitwise AND `a & b` (inside class)
+	inline ${1:T} operator&(const ${3:U}& ${4:b}) const { $9 }
+snippet op&o Bitwise AND `a & b` (outside class)
+	${1:T} operator&(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op|i Bitwise OR `a | b` (inside class)
+	inline ${1:T} operator|(const ${3:U}& ${4:b}) const { $9 }
+snippet op|o Bitwise OR `a | b` (outside class)
+	${1:T} operator|(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op^i Bitwise XOR `a ^ b` (inside class)
+	inline ${1:T} operator^(const ${3:U}& ${4:b}) const { $9 }
+snippet op^o Bitwise XOR `a ^ b` (outside class)
+	${1:T} operator^(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op<<i Bitwise left shift `a << b` (inside class)
+	inline ${1:T} operator<<(const ${3:U}& ${4:b}) const { $9 }
+snippet op<<o Bitwise left shift `a << b` (outside class)
+	${1:T} operator<<(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op>>i Bitwise right shift `a >> b` (inside class)
+	inline ${1:T} operator>>(const ${3:U}& ${4:b}) const { $9 }
+snippet op>>o Bitwise right shift `a >> b` (outside class)
+	${1:T} operator>>(const $1& ${2:a}, const ${3:U}& ${4:b}) { $9 }
 
-# Member access operators
-snippet op[]    subscript `a[b]`
-        $1& operator[]($2 b);
-snippet op*             indirection `*a`
-        $1& operator*();
-snippet oop*    indirection `*a`
-        $1& operator*($2 a);
-snippet op&             address-of `&a`
-        $1* operator&();
-snippet oop&    address-of `&a`
-        $1* operator&($2 a);
-snippet op->    member of pointer `a->b`
-        $1* operator->();
-snippet op->*   pointer to member of pointer `a->*b`
-        $1& operator->*($2 b);
-snippet oop->*  pointer to member of pointer `a->*b`
-        $1& operator->*($2 a, $3 b);
+# logical - https://en.cppreference.com/w/cpp/language/operator_logical
+snippet opi negation `not a`, `!a` (inside class)
+	inline bool operator!() const;
+snippet opo negation `not a`, `!a` (outside class)
+	bool operator!(const ${1:T} &${2:a});
+snippet opi AND `a and b`, `a && b` (inside class)
+	inline bool operator&&(const ${3:U} &${4:b}) const;
+snippet opo AND `a and b`, `a && b` (outside class)
+	bool operator&&(const ${1:T} &${2:a}, const ${3:U} &${4:b});
+snippet opi inclusive OR `a or b`, `a || b` (inside class)
+	inline bool operator||(const ${3:U} &${4:b}) const;
+snippet opo inclusive OR `a or b`, `a || b` (outside class)
+	bool operator||(const ${1:T} &${2:a}, const ${3:U} &${4:b});
 
-# Other operators
-snippet op()    function call `a(...args)`
-        $1 operator()($2);
-snippet op,             comma `a, b`
-        $2& operator,($2 &b);
-snippet oop,    comma `a, b`
-        $2& operator,(const $1 &a, $2 &b);
+# comparison - https://en.cppreference.com/w/cpp/language/operator_comparison
+snippet op==i Equal to `a == b` (inside class)
+	inline bool operator==(const ${3:U}& ${4:b}) const { $9 }
+snippet op==o Equal to `a == b` (outside class)
+	bool operator==(const ${1:T}& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op!=i Not equal to `a != b` (inside class)
+	inline bool operator!=(const ${3:U}& ${4:b}) const { $9 }
+snippet op!=o Not equal to `a != b` (outside class)
+	bool operator!=(const ${1:T}& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op<i Less than `a < b` (inside class)
+	inline bool operator<(const ${3:U}& ${4:b}) const { $9 }
+snippet op<o Less than `a < b` (outside class)
+	bool operator<(const ${1:T}& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op>i Greater than `a > b` (inside class)
+	inline bool operator>(const ${3:U}& ${2:a}) const { $9 }
+snippet op>o Greater than `a > b` (outside class)
+	bool operator>(const ${1:T}& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op<=i Less than or equal to `a <= b` (inside class)
+	inline bool operator<=(const ${3:U}& ${4:b}) const { $9 }
+snippet op<=o Less than or equal to `a <= b` (outside class)
+	bool operator<=(const ${1:T}& ${2:a}, const ${3:U}& ${4:b}) { $9 }
+snippet op>=i Greater than or equal to `a >= b` (inside class)
+	inline bool operator>=(const ${3:U}& ${4:b}) const { $9 }
+snippet op>=o Greater than or equal to `a >= b` (outside class)
+	bool operator>=(const ${1:T}& ${2:a}, const ${3:U}& ${4:b}) { $9 }
 
-# Stream
-snippet op<<s   stream insertion `out << b`
-        friend std::ostream &operator<<(std::ostream &out, $1 const &b);
-snippet op>>s   stream extraction `in >>  b`
-        friend std::istream &operator>>(std::istream &in, $1 &b);
+# member access
+snippet op[]i subscript `a[b]` (inside class)
+	inline ${1:R}& operator[](${2:U} ${3:b}) { $9 }
+snippet op*i indirection `*a` (inside class)
+	inline ${1:R}& operator*() { $9 }
+snippet op*o indirection `*a` (outside class)
+	${1:R}& operator*(${2:T} ${3:a}) { $9 }
+snippet op&i address-of `&a` (inside class)
+	inline ${1:R}* operator&() { $9 }
+snippet op&o address-of `&a` (outside class)
+	${1:R}* operator&(${2:T} ${3:a}) { $9 }
+snippet op->i member of pointer `a->b` (inside class)
+	inline ${1:R}* operator->() { $9 }
+snippet op->*i pointer to member of pointer `a->*b` (inside class)
+	inline ${1:R}& operator->*(${2:U} ${3:b}) { $9 }
+snippet op->*i pointer to member of pointer `a->*b` (outside class)
+	${1:R}& operator->*(${2:T} ${3:a}, ${4:U} ${5:b}) { $9 }
+
+# other - https://en.cppreference.com/w/cpp/language/operator_other
+snippet op() Function call `a(a1, a2)`
+	inline ${1:R} operator()(${2}) { $9 }
+snippet op,i Comma `a,  b` (inside class)
+	${1:U}& operator,(${1:U} &${2:b}) { $9 }
+snippet op,o Comma `a,  b` (outside class)
+	${1:U}& operator,(const ${2:T} &${3:a}, $U &${4:b}) { $9 }
+
+# custom
+snippet op<<s
+	std::ostream& operator<<(std::ostream& ${1:out}, const ${2:T}& ${3:b}) { $9 }
+snippet op>>s
+	std::istream& operator>>(std::istream& ${1:in}, ${2:T}& ${3:b}) { $9 }
+
+
+
+#
+# std
+#
+
+snippet stdhash
+	struct std::hash<${1:T}> {
+		inline size_t operator()(const $1& ${2:value}) const { $9 }
+	};
+
+
+
+#
+# class methods
+#
+
+snippet getter
+	inline const ${1:T}& get_${2:name}() const noexcept { return this->$4; }
+
+snippet setter
+	inline void set_${2:T}(${1:name} ${3:value}) noexcept { this->$4 = std::move($3); }
+
+snippet getset
+	inline const ${1:T}& get_${2:name}() const noexcept { return this->$4; }
+	inline void set_${2:T}(${1:name} ${3:value}) noexcept { this->$4 = std::move($3); }
+
+snippet accessors
+	inline       ${1:T}&  ${2:name}()       noexcept { return this->$3; }
+	inline const ${1:T}&  ${2:name}() const noexcept { return this->$3; }
+	inline const ${1:T}& c${2:name}() const noexcept { return this->$3; }
+
+
+
+
+
+# TODO: below
+
+# constructors
+snippet constructors
+	// default constructor and destructor
+	$1() = default;
+	~$1() = default;
+
+	// copy & move constructors
+	$1(const $1&) = default;
+	auto operator=(const $1&) -> $1& = default;
+	$1($1&&) = default;
+	auto operator=($1&&) -> $1& = default;
