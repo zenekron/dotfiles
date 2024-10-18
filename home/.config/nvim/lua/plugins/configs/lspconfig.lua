@@ -148,6 +148,13 @@ M.setup = function()
     },
   }
 
+  local ts_ls = {
+    on_attach = function(client)
+      -- we either format using biome or formatter.nvim+prettier
+      client.server_capabilities.documentFormattingProvider = false
+    end
+  }
+
   local server_options = {
     -- emmet_ls = {},
     ansiblels = {},
@@ -172,12 +179,7 @@ M.setup = function()
     svelte = {},
     terraformls = {},
     tflint = {},
-    tsserver = {
-      on_attach = function(client)
-        -- we either format using biome or formatter.nvim+prettier
-        client.server_capabilities.documentFormattingProvider = false
-      end
-    },
+    ts_ls = ts_ls,
   }
 
   for name, options in pairs(server_options) do
