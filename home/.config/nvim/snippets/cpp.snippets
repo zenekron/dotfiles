@@ -226,7 +226,33 @@ snippet accessors
 
 
 
+#
+# doctest - https://github.com/doctest/doctest/blob/master/doc/markdown/stringification.md
+#
 
+snippet doctest_stringmaker
+	template<>
+	struct doctest::StringMaker<${1:T}> {
+		static String convert(const $1& ${2:value}) { $9 }
+	};
+
+
+
+#
+# fmt - https://fmt.dev/11.0/api/#formatting-user-defined-types
+#
+
+snippet format_as
+	inline auto format_as(${1:T} ${2:value}) { $9 }
+
+snippet formatter
+	template <>
+	struct fmt::formatter<${1:T}> {
+		// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
+		constexpr auto parse(format_parse_context& ctx) -> format_parse_context::iterator { ${8:return ctx.begin();} }
+
+		auto format(const ${1}& ${2:value}, format_context& ctx) const -> format_context::iterator { $9 }
+	};
 
 # TODO: below
 
