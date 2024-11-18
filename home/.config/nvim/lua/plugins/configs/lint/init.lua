@@ -9,21 +9,39 @@ M.setup = function()
     table.insert(lint.linters["sqlfluff"].args, v)
   end
 
+  local cmake = {}
+  if vim.fn.executable("cmake-lint") == 1 then
+    table.insert(cmake, "cmakelint")
+  end
+
+  local cpp = {}
+  if vim.fn.executable("cppcheck") == 1 then
+    table.insert(cmake, "cppcheck")
+  end
+
+  local typescript = {}
+  if vim.fn.executable("oxlint") == 1 then
+    table.insert(typescript, "oxlint")
+  end
+  if vim.fn.executable("eslint") == 1 then
+    table.insert(typescript, "eslint")
+  end
+
   lint.linters_by_ft = {
-    c = { "cppcheck", },
-    cmake = { "cmakelint", },
-    cpp = { "cppcheck", },
-    javascript = { "eslint", },
-    javascriptreact = { "eslint", },
+    c = cpp,
+    cmake = cmake,
+    cpp = cpp,
+    javascript = typescript,
+    javascriptreact = typescript,
     pgsql = { "sqlfluff", },
     sh = { "shellcheck", },
     terraform = { "terraform-validate", "tfsec", },
-    typescript = { "eslint", },
-    typescriptreact = { "eslint", },
-    vue = { "eslint", },
+    typescript = typescript,
+    typescriptreact = typescript,
+    vue = typescript,
   }
 
-  vim.api.nvim_create_autocmd({"BufRead", "BufWritePost" }, {
+  vim.api.nvim_create_autocmd({ "BufRead", "BufWritePost" }, {
     pattern = "*",
     callback = function()
       lint.try_lint()
