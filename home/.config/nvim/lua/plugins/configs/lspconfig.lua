@@ -17,7 +17,6 @@ vim.g.rustaceanvim = {
 
 M.setup = function()
   local lspconfig = require("lspconfig")
-  local mason = require("mason-core.package")
   local schemastore = require("schemastore")
 
 
@@ -150,7 +149,8 @@ M.setup = function()
   }
 
   local powershell_es = {
-    bundle_path = require("mason-registry").get_package("powershell-editor-services"):get_install_path(),
+    bundle_path = "/opt/powershell-editor-services",
+    cmd = { "pwsh", "-NoLogo", "-NoProfile", "-Command", "/opt/powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1 -Stdio" },
     settings = {
       powershell = {
         codeFormatting = { Preset = "OTBS" },
