@@ -16,3 +16,6 @@
 [submodule "modules/catppuccin/delta"]
 	path = modules/catppuccin/delta
 	url = https://github.com/catppuccin/delta.git
+[submodule "modules/catppuccin/i3"]
+	path = modules/catppuccin/i3
+	url = https://github.com/catppuccin/i3

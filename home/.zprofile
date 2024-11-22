@@ -4,5 +4,6 @@
 # session-wide environment variables.
 
 if [[ -z $WAYLAND_DISPLAY ]] && [[ $XDG_VTNR -eq 1 ]]; then
-	exec wayland-run.sh Hyprland
+	exec wayland-run.sh sway
+	# exec wayland-run.sh Hyprland
 fi

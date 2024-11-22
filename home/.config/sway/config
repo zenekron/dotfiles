@@ -1,0 +1,215 @@
+# man 5 sway
+
+#
+# Variables
+#
+
+# Mod1 = Alt, Mod4 = Logo Key
+
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $terminal foot
+set $menu wofi
+
+set $font "JetBrainsMono Nerd Font 10"
+
+
+
+
+#
+# Style
+#
+
+default_border pixel 2
+
+gaps outer 8
+gaps inner 8
+
+font $font
+
+output * background "~/.dotfiles/wallpapers/[AI] The Wooden Cabin.jpg" fit
+
+# cattpuccin
+	include ~/.dotfiles/modules/catppuccin/i3/themes/catppuccin-frappe
+
+	client.focused			 $lavender $base $text	$rosewater $lavender
+	client.focused_inactive  $overlay0 $base $text	$rosewater $overlay0
+	client.unfocused		 $overlay0 $base $text	$rosewater $overlay0
+	client.urgent			 $peach    $base $peach $overlay0  $peach
+	client.placeholder		 $overlay0 $base $text	$overlay0  $overlay0
+	client.background		 $base
+
+	bar colors {
+		background		   $base
+		statusline		   $text
+		focused_statusline $text
+		focused_separator  $base
+
+		# target		   border bg		text
+		focused_workspace  $base  $mauve	$crust
+		active_workspace   $base  $surface2 $text
+		inactive_workspace $base  $base		$text
+		urgent_workspace   $base  $red		$crust
+	}
+
+
+
+#
+# Inputs and Outputs
+#
+
+# man 5 sway-input
+input type:keyboard {
+	xkb_layout us
+	xkb_options compose:ralt
+}
+
+# man 5 sway-output
+# TODO:
+# output * {}
+
+
+
+#
+# Key Bindings
+#
+
+# sway
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m "Do you want to exit sway?" -B "Yes" "swaymsg exit"
+
+# kill programs
+bindsym $mod+Shift+q kill
+
+# launch programs
+bindsym $mod+Return exec $terminal
+bindsym $mod+d exec $menu
+
+# take a screenshot
+bindsym $mod+s exec grim -g "$(slurp)" - | wl-copy
+
+# move windows with <key>+LMB, resize them with <key>+RMB
+floating_modifier $mod normal
+
+
+# Moving Around
+
+	bindsym $mod+$left focus left
+	bindsym $mod+$down focus down
+	bindsym $mod+$up focus up
+	bindsym $mod+$right focus right
+
+	bindsym $mod+Shift+$left move left
+	bindsym $mod+Shift+$down move down
+	bindsym $mod+Shift+$up move up
+	bindsym $mod+Shift+$right move right
+
+	# bindm = $mod, mouse:272, movewindow
+
+
+# Workspaces
+
+	bindsym $mod+1 workspace number 1
+	bindsym $mod+2 workspace number 2
+	bindsym $mod+3 workspace number 3
+	bindsym $mod+4 workspace number 4
+	bindsym $mod+5 workspace number 5
+	bindsym $mod+6 workspace number 6
+	bindsym $mod+7 workspace number 7
+	bindsym $mod+8 workspace number 8
+	bindsym $mod+9 workspace number 9
+	bindsym $mod+0 workspace number 10
+
+	bindsym $mod+u workspace prev
+	bindsym $mod+i workspace next
+
+	bindsym $mod+Shift+1 move container to workspace number 1
+	bindsym $mod+Shift+2 move container to workspace number 2
+	bindsym $mod+Shift+3 move container to workspace number 3
+	bindsym $mod+Shift+4 move container to workspace number 4
+	bindsym $mod+Shift+5 move container to workspace number 5
+	bindsym $mod+Shift+6 move container to workspace number 6
+	bindsym $mod+Shift+7 move container to workspace number 7
+	bindsym $mod+Shift+8 move container to workspace number 8
+	bindsym $mod+Shift+9 move container to workspace number 9
+	bindsym $mod+Shift+0 move container to workspace number 10
+
+	bindsym $mod+Shift+u move container to workspace prev
+	bindsym $mod+Shift+i move container to workspace next
+
+
+# Layout
+
+	bindsym $mod+f fullscreen
+
+	bindsym $mod+b splith
+	bindsym $mod+v splitv
+
+	# # Move focus to the parent container
+	# bindsym $mod+a focus parent
+	# # Switch the current container between different layout styles
+	# bindsym $mod+s layout stacking
+	# bindsym $mod+w layout tabbed
+	# bindsym $mod+e layout toggle split
+
+
+	bindsym $mod+space focus mode_toggle
+	bindsym $mod+Shift+space floating toggle
+
+
+# Scratchpad
+
+	bindsym $mod+m scratchpad show
+	# bindsym $mod+Shift+m move scratchpad
+	bindsym $mod+Shift+m floating enable, resize set width 1920 height 1080, move scratchpad
+
+
+# Resize
+
+	mode "resize" {
+		bindsym $left resize shrink width 10px
+		bindsym $down resize grow height 10px
+		bindsym $up resize shrink height 10px
+		bindsym $right resize grow width 10px
+
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+		bindsym $mod+r mode "default"
+	}
+
+	bindsym $mod+r mode "resize"
+
+
+
+#
+# Status Bar
+#
+
+# man 5 sway-bar
+bar swaybar_command waybar
+
+
+
+#
+# Start programs
+#
+
+exec udiskie --tray
+exec wl-paste -t text --watch clipman store --no-persist
+
+
+
+#
+# Rules
+#
+
+for_window [class="firefox" title="Library"] floating
+for_window [class="org\.prismlauncher\.PrismLauncher"] floating
+for_window [class="udiskie"] floating
+
+include /etc/sway/config.d/*
