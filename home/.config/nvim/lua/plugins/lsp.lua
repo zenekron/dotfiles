@@ -1,19 +1,10 @@
 --- @type LazyPluginSpec[]
 return {
-  -- Portable package manager for Neovim that runs everywhere Neovim runs.
-  -- https://github.com/williamboman/mason.nvim
-  {
-    "williamboman/mason.nvim",
-    config = true,
-  },
-
   -- Quickstart configs for Nvim LSP
   -- https://github.com/neovim/nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason.nvim",
-
       -- nvim-cmp source for neovim's built-in language server client.
       -- https://github.com/hrsh7th/cmp-nvim-lsp
       { "hrsh7th/cmp-nvim-lsp" },
