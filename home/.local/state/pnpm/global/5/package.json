@@ -1,8 +1,9 @@
 {
 	"dependencies": {
-		"@microsoft/compose-language-service": "^0.2.0",
-		"@olrtg/emmet-language-server": "^2.6.0",
+		"@microsoft/compose-language-service": "^0.3.0",
+		"@olrtg/emmet-language-server": "^2.6.1",
 		"dockerfile-language-server-nodejs": "^0.13.0",
-		"neovim": "^5.1.0"
+		"neovim": "^5.3.0",
+		"typescript-language-server": "^4.3.3"
 	}
 }
