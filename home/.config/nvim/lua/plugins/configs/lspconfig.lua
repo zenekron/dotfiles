@@ -104,6 +104,10 @@ M.setup = function()
   -- servers
   --
 
+  local buf_ls = {
+    cmd = { "/usr/bin/buf", "beta", "lsp" }
+  }
+
   local clangd = {
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
     settings = {
@@ -170,7 +174,7 @@ M.setup = function()
     ansiblels = {},
     bashls = {},
     biome = {},
-    buf_ls = {},
+    buf_ls = buf_ls,
     clangd = clangd,
     cssls = {},
     docker_compose_language_service = docker_compose_language_service,
