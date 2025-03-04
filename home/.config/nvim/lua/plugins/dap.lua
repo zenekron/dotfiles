@@ -33,13 +33,7 @@ return {
         },
       }
 
-      dap.adapters.lldb = {
-        type = "executable",
-        command = "lldb-vscode",
-        name = "lldb",
-      }
-
-
+      --- @type dap.Configuration
       local codelldb = {
         name = "Launch",
         type = "codelldb",
@@ -47,6 +41,14 @@ return {
         program = pick_executable,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
+
+        args = function()
+          local str = vim.fn.input({
+            prompt = "args: ",
+            default = "",
+          })
+          return require("dap.utils").splitstr(str)
+        end,
       }
 
       dap.configurations.cpp = { codelldb }
