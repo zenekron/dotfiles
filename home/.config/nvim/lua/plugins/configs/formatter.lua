@@ -24,6 +24,7 @@ M.setup = function()
       c = { require("formatter.filetypes.c").clangformat },
       cpp = { require("formatter.filetypes.cpp").clangformat },
       css = { prettier },
+      go = { require("formatter.filetypes.go").gofmt },
       html = { prettier },
       java = { prettier },
       javascript = { prettier },
