@@ -7,3 +7,25 @@
 [user]
 	name = zenekron
 	email = zenekron@gmail.com
+
+; catppuccin/delta
+; https://github.com/catppuccin/delta
+[include]
+	path = ~/.dotfiles/modules/catppuccin/delta/catppuccin.gitconfig
+
+[delta]
+	features = catppuccin-frappe
+
+; delta
+; https://github.com/dandavison/delta
+[core]
+	pager = delta
+
+[delta]
+	navigate = true
+
+[interactive]
+	diffFilter = delta --color-only
+
+[merge]
+	conflictstyle = zdiff3
