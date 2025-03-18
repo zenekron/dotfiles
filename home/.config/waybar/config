@@ -1,0 +1,75 @@
+{
+	"layer": "top",
+	"position": "bottom",
+	// "height": 24,
+	// "width": 1280,
+	"margin": "-8 16 8 16",
+	"spacing": 8,
+
+	"modules-left": ["clock", "sway/mode"],
+	"modules-center": ["hyprland/workspaces", "sway/workspaces"],
+	"modules-right": ["cpu", "memory", "network", "tray"],
+
+	"clock": {
+		"format": "{:%H:%M} ",
+		"tooltip-format": "<span background='#2E3440'><tt><small>{calendar}</small></tt></span>",
+		"calendar": {
+			"mode": "week",
+			"mode-mon-col": 3,
+			"weeks-pos": "",
+			"format": {
+				"months": "<span color='#88C0D0'><b>{}</b></span>",
+				"days": "<span color='#D8DEE9'><b>{}</b></span>",
+				"weeks": "<span color='#B48EAD'><b>W{}</b></span>",
+				"weekdays": "<span color='#EBCB8B'><b>{}</b></span>",
+				"today": "<span color='#BF616A'><b>{}</b></span>"
+			}
+		}
+	},
+
+	"cpu": {
+		"format": "{usage}% <big></big>",
+		"states": {
+			"state-warning": 50,
+			"state-dangerous": 75,
+			"state-critical": 100
+		}
+	},
+
+	"hyprland/workspaces": {
+		"all-outputs": false
+	},
+
+	"memory": {
+		"format": "{percentage}% <big></big>",
+		"states": {
+			"state-warning": 50,
+			"state-dangerous": 75,
+			"state-critical": 100
+		}
+	},
+
+	"network": {
+		"format-ethernet": "{ifname} {ipaddr} ",
+		"format-wifi": "{ifname} {essid} ({signalStrength}%) ",
+		"format-linked": "{ifname} ",
+		"format-disconnected": "⚠",
+		"tooltip-format": "{bandwidthUpBits}    {bandwidthDownBits} "
+	},
+
+	"sway/mode": {},
+
+	"sway/workspaces": {
+		"all-outputs": false,
+		"format": "{name}",
+		"format-icons": {
+			"default": "",
+			"urgent": "",
+			"focused": "",
+			"persistent": "!"
+		}
+	},
+
+	"tray": {}
+}
+// vim: ft=jsonc

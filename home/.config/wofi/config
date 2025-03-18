@@ -1,0 +1,13 @@
+# man 5 wofi
+mode=drun
+width=25%
+term=wezterm
+no_actions=true
+
+allow_images=true
+hide_scroll=true
+
+key_up=Control_L-k
+key_down=Control_L-j
+key_left=Control_L-h
+key_right=Control_L-l
