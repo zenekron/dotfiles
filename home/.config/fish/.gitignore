@@ -1,0 +1,8 @@
+# babarot/enhancd
+/conf.d/enhancd.fish
+/functions/_enhancd*.fish
+/functions/enhancd
+/functions/enhancd.fish
+
+# catppuccin/fish
+/themes/Catppuccin*.theme

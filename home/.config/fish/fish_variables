@@ -1,0 +1,76 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export BROWSER:firefox
+SETUVAR --export EDITOR:nvim
+SETUVAR --export ENHANCD_ARG_DOUBLE_DOT:\x2e\x2e
+SETUVAR --export ENHANCD_ARG_HOME:
+SETUVAR --export ENHANCD_ARG_HYPHEN:\x2d
+SETUVAR --export ENHANCD_ARG_SINGLE_DOT:\x2e
+SETUVAR --export ENHANCD_COMMAND:cd
+SETUVAR --export ENHANCD_COMPLETION_BEHAVIOR:default
+SETUVAR --export ENHANCD_COMPLETION_DEFAULT:1
+SETUVAR --export ENHANCD_COMPLETION_KEYBIND:\x5eI
+SETUVAR --export ENHANCD_DIR:/home/zenekron/\x2eenhancd
+SETUVAR --export ENHANCD_ENABLE_DOUBLE_DOT:true
+SETUVAR --export ENHANCD_ENABLE_HOME:true
+SETUVAR --export ENHANCD_ENABLE_HYPHEN:true
+SETUVAR --export ENHANCD_ENABLE_SINGLE_DOT:true
+SETUVAR --export ENHANCD_FILTER:fzy\x3afzf\x3apeco\x3ask\x3azf
+SETUVAR --export ENHANCD_HYPHEN_NUM:10
+SETUVAR --export ENHANCD_ROOT:/home/zenekron/\x2econfig/fish/functions/enhancd
+SETUVAR --export ENHANCD_USE_ABBREV:false
+SETUVAR --export MANPAGER:sh\x20\x2dc\x20\x27sed\x20\x2du\x20\x2de\x20\x22s/\x5cx1B\x5c\x5b\x5b0\x2d9\x3b\x5d\x2am//g\x3b\x20s/\x2e\x5cx08//g\x22\x20\x7c\x20bat\x20\x2dp\x20\x2dlman\x27
+SETUVAR --export OLLAMA_URL:http\x3a//astaroth\x2elocal\x3a11434
+SETUVAR --export PAGER:less\x20\x2dRF
+SETUVAR --export VISUAL:nvim
+SETUVAR --export XDG_CACHE_HOME:/home/zenekron/\x2ecache
+SETUVAR --export XDG_CONFIG_HOME:/home/zenekron/\x2econfig
+SETUVAR --export XDG_DATA_HOME:/home/zenekron/\x2elocal/share
+SETUVAR --export XDG_STATE_HOME:/home/zenekron/\x2elocal/state
+SETUVAR --export _ENHANCD_VERSION:\x1d
+SETUVAR __fish_initialized:3800
+SETUVAR _fisher_babarot_2F_enhancd_files:\x7e/\x2econfig/fish/functions/_enhancd_alias\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_cd_after\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_cd_before\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_cd_builtin\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_cd_ready\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_command_awk\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_command_grep\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_command_run\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_command_which\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_complete\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filepath_abs\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filepath_current_dir\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filepath_get_dirs_in_cwd\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filepath_get_parent_dirs\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filepath_split\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filepath_walk\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filter_exclude\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filter_exists\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filter_fuzzy\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filter_interactive\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filter_limit\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filter_replace\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filter_reverse\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_filter_unique\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_helper_is_default_flag\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_helper_parse_filter_string\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_history_exists\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_history_list\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_history_open\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_history_update\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_ltsv_get\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_ltsv_open\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_ltsv_parse\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_source_history\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_source_home\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_source_mru\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_source_parent_dirs\x2efish\x1e\x7e/\x2econfig/fish/functions/_enhancd_sources_current_dirs\x2efish\x1e\x7e/\x2econfig/fish/functions/enhancd\x1e\x7e/\x2econfig/fish/functions/enhancd\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/enhancd\x2efish
+SETUVAR _fisher_catppuccin_2F_fish_files:\x7e/\x2econfig/fish/themes/Catppuccin\x20Frappe\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Latte\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Macchiato\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Mocha\x2etheme
+SETUVAR _fisher_plugins:babarot/enhancd\x1ecatppuccin/fish
+SETUVAR _fisher_upgraded_to_4_4:\x1d
+SETUVAR fish_color_autosuggestion:737994
+SETUVAR fish_color_cancel:e78284
+SETUVAR fish_color_command:8caaee
+SETUVAR fish_color_comment:838ba7
+SETUVAR fish_color_cwd:e5c890
+SETUVAR fish_color_cwd_root:red
+SETUVAR fish_color_end:ef9f76
+SETUVAR fish_color_error:e78284
+SETUVAR fish_color_escape:ea999c
+SETUVAR fish_color_gray:737994
+SETUVAR fish_color_history_current:\x2d\x2dbold
+SETUVAR fish_color_host:8caaee
+SETUVAR fish_color_host_remote:a6d189
+SETUVAR fish_color_keyword:e78284
+SETUVAR fish_color_normal:c6d0f5
+SETUVAR fish_color_operator:f4b8e4
+SETUVAR fish_color_option:a6d189
+SETUVAR fish_color_param:eebebe
+SETUVAR fish_color_quote:a6d189
+SETUVAR fish_color_redirection:f4b8e4
+SETUVAR fish_color_search_match:\x2d\x2dbackground\x3d414559
+SETUVAR fish_color_selection:\x2d\x2dbackground\x3d414559
+SETUVAR fish_color_status:e78284
+SETUVAR fish_color_user:81c8be
+SETUVAR fish_color_valid_path:\x2d\x2dunderline
+SETUVAR fish_greeting:\x1d
+SETUVAR fish_key_bindings:fish_vi_key_bindings
+SETUVAR fish_pager_color_background:\x1d
+SETUVAR fish_pager_color_completion:c6d0f5
+SETUVAR fish_pager_color_description:737994
+SETUVAR fish_pager_color_prefix:f4b8e4
+SETUVAR fish_pager_color_progress:737994
+SETUVAR fish_pager_color_secondary_background:\x1d
+SETUVAR fish_pager_color_secondary_completion:\x1d
+SETUVAR fish_pager_color_secondary_description:\x1d
+SETUVAR fish_pager_color_secondary_prefix:\x1d
+SETUVAR fish_pager_color_selected_background:\x1d
+SETUVAR fish_pager_color_selected_completion:\x1d
+SETUVAR fish_pager_color_selected_description:\x1d
+SETUVAR fish_pager_color_selected_prefix:\x1d
+SETUVAR fish_user_paths:/home/zenekron/\x2edotfiles/bin
