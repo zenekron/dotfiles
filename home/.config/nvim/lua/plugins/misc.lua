@@ -57,6 +57,10 @@ return {
 				config.input = {}
 			end
 
+			if vim.g.notify == "snacks" then
+				config.notifier = {}
+			end
+
 			return config
 		end,
 
