@@ -130,14 +130,18 @@ return {
 
 			---@type cmp.ConfigSchema
 			return {
+				snippet = snippet,
+				mapping = mapping,
+				sources = cmp.config.sources(sources),
+
+				formatting = {
+					fields = { "abbr", "kind" },
+				},
+
 				window = {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
-
-				snippet = snippet,
-				mapping = mapping,
-				sources = cmp.config.sources(sources),
 			}
 		end,
 
