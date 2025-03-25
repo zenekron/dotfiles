@@ -9,8 +9,8 @@ vim.g.colorscheme = "catppuccin-frappe"
 ---@type boolean
 vim.g.nerd_font = true
 
----@type nil | "cmp"
-vim.g.complete = "cmp"
+---@type nil | "blink" | "cmp"
+vim.g.complete = "blink"
 ---@type nil | "luasnip"
 vim.g.snippet = "luasnip"
 ---@type nil | "conform"

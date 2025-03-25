@@ -149,4 +149,92 @@ return {
 
 		version = false,
 	},
+
+	-- Performant, batteries-included completion plugin for Neovim
+	-- https://github.com/saghen/blink.cmp
+	{
+		"saghen/blink.cmp",
+
+		dependencies = {
+			-- Set of preconfigured snippets for different languages
+			-- https://github.com/rafamadriz/friendly-snippets
+			{ "rafamadriz/friendly-snippets", optional = true },
+		},
+		cond = function()
+			return vim.g.complete == "blink"
+		end,
+
+		opts = function()
+			---@type blink.cmp.Config
+			local o = {
+				appearance = {
+					nerd_font_variant = "mono",
+				},
+
+				completion = {
+					documentation = {
+						auto_show = true,
+					},
+				},
+
+				fuzzy = {
+					implementation = "prefer_rust_with_warning",
+				},
+
+				signature = {
+					enabled = true,
+				},
+
+				sources = {
+					default = {
+						"lsp",
+						"snippets",
+						"path",
+						"buffer",
+					},
+				},
+
+				keymap = {
+					preset = "none",
+
+					["<c-space>"] = { "show", "fallback" },
+					["<tab>"] = { "select_next", "fallback" },
+					["<s-tab>"] = { "select_prev", "fallback" },
+					["<c-e>"] = { "hide", "fallback" },
+					["<cr>"] = { "accept", "fallback" },
+
+					["<c-f>"] = { "scroll_documentation_down", "fallback" },
+					["<c-d>"] = { "scroll_documentation_up", "fallback" },
+				},
+			}
+
+			if vim.g.snippet == nil then
+				-- do nothing
+			elseif vim.g.snippet == "luasnip" then
+				o.snippets = vim.tbl_deep_extend("force", o.snippets or {}, { preset = "luasnip" })
+			else
+				vim.notify("blink: unsupported snippet engine '" .. vim.g.snippet .. "'", vim.log.levels.ERROR, {})
+			end
+
+			local has_lazydev = pcall(require, "lazydev")
+			if has_lazydev then
+				table.insert(o.sources.default, "lazydev")
+				o.sources.providers = vim.tbl_extend("force", o.sources.providers or {}, {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						-- make lazydev completions top priority (see `:h blink.cmp`)
+						score_offset = 100,
+					},
+				})
+			end
+
+			return o
+		end,
+		opts_extend = { "sources.default" },
+
+		event = "InsertEnter",
+
+		version = "*",
+	},
 }
