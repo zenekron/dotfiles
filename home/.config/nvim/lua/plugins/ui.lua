@@ -1,3 +1,9 @@
+local util = require("util")
+
+local trouble = util.requirei("trouble")
+local ktrouble = util.requirek("trouble")
+local kwhichkey = util.requirek("which-key")
+
 ---@module "lazy"
 ---@type LazyPluginSpec[]
 return {
@@ -32,19 +38,13 @@ return {
 
 		cmd = "Trouble",
 		keys = {
-			{
-				"<leader>tt",
-				function()
-					local trouble = require("trouble")
-					trouble.toggle()
-				end,
-			},
+			---@diagnostic disable-next-line: assign-type-mismatch
+			{ "<leader>tt", ktrouble.toggle() },
 
 			-- diagnostics
 			{
 				"<leader>d",
 				function()
-					local trouble = require("trouble")
 					trouble.close()
 					trouble.open({ mode = "diagnostics" })
 				end,
@@ -54,7 +54,6 @@ return {
 			{
 				"gd",
 				function()
-					local trouble = require("trouble")
 					trouble.close()
 					trouble.open({ mode = "lsp_definitions" })
 				end,
@@ -62,7 +61,6 @@ return {
 			{
 				"gD",
 				function()
-					local trouble = require("trouble")
 					trouble.close()
 					trouble.open({ mode = "lsp_declarations" })
 				end,
@@ -70,7 +68,6 @@ return {
 			{
 				"gy",
 				function()
-					local trouble = require("trouble")
 					trouble.close()
 					trouble.open({ mode = "lsp_type_definitions" })
 				end,
@@ -78,7 +75,6 @@ return {
 			{
 				"gr",
 				function()
-					local trouble = require("trouble")
 					trouble.close()
 					trouble.open({ mode = "lsp_references", new = false })
 				end,
@@ -86,7 +82,6 @@ return {
 			{
 				"gi",
 				function()
-					local trouble = require("trouble")
 					trouble.close()
 					trouble.open({ mode = "lsp_implementations" })
 				end,
@@ -155,12 +150,7 @@ return {
 
 		event = "VeryLazy",
 		keys = {
-			{
-				"<leader>?",
-				function()
-					require("which-key").show({ global = false })
-				end,
-			},
+			{ "<leader>?", kwhichkey.show({ global = true }) },
 		},
 
 		version = "*",

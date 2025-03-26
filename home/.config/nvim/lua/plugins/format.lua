@@ -1,3 +1,7 @@
+local util = require("util")
+
+local kconform = util.requirek("conform")
+
 ---@module "lazy"
 ---@type LazyPluginSpec[]
 return {
@@ -52,13 +56,7 @@ return {
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
-			{
-				"<leader>ff",
-				function()
-					require("conform").format({ async = true })
-				end,
-				desc = "Format",
-			},
+			{ "<leader>ff", kconform.format({ async = true }), desc = "Format" },
 		},
 
 		version = "*",

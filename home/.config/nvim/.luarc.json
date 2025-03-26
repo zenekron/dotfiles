@@ -1,0 +1,8 @@
+{
+	"runtime": {
+		"special": {
+			"util.requirei": "require",
+			"util.requirek": "require"
+		}
+	}
+}

@@ -1,3 +1,8 @@
+local util = require("util")
+
+local gitsigns = util.requirei("gitsigns")
+local kgitsigns = util.requirek("gitsigns")
+
 ---@module "lazy"
 ---@type LazyPluginSpec[]
 return {
@@ -10,48 +15,14 @@ return {
 
 		lazy = false,
 		keys = {
-			{
-				"<leader>hb",
-				function()
-					require("gitsigns").blame_line()
-				end,
-				desc = "git: [b]lame line",
-			},
-			{
-				"<leader>hB",
-				"<cmd>Gitsigns blame<cr>",
-				desc = "git: toggle [B]lame",
-			},
+			{ "<leader>hb", kgitsigns.blame_line(), desc = "git: [b]lame line" },
+			{ "<leader>hB", "<cmd>Gitsigns blame<cr>", desc = "git: toggle [B]lame" },
 
-			{
-				"<leader>hp",
-				function()
-					require("gitsigns").preview_hunk()
-				end,
-				desc = "git: [p]review hunk",
-			},
-			{
-				"<leader>hP",
-				function()
-					require("gitsigns").preview_hunk_inline()
-				end,
-				desc = "git: [P]review hunk inline",
-			},
+			{ "<leader>hp", kgitsigns.preview_hunk(), desc = "git: [p]review hunk" },
+			{ "<leader>hP", kgitsigns.preview_hunk_inline(), desc = "git: [P]review hunk inline" },
 
-			{
-				"<leader>hd",
-				function()
-					require("gitsigns").diffthis()
-				end,
-				desc = "git: [d]iff against index",
-			},
-			{
-				"<leader>hD",
-				function()
-					require("gitsigns").diffthis("@")
-				end,
-				desc = "git: [D]iff against last commit",
-			},
+			{ "<leader>hd", kgitsigns.diffthis(), desc = "git: [d]iff against index" },
+			{ "<leader>hD", kgitsigns.diffthis("@"), desc = "git: [D]iff against last commit" },
 
 			-- navigation
 			{
@@ -60,7 +31,7 @@ return {
 					if vim.wo.diff then
 						vim.cmd.normal({ "]c", bang = true })
 					else
-						require("gitsigns").nav_hunk("next")
+						gitsigns.nav_hunk("next")
 					end
 				end,
 				desc = "git: jump to next [c]hange",
@@ -71,24 +42,20 @@ return {
 					if vim.wo.diff then
 						vim.cmd.normal({ "[c", bang = true })
 					else
-						require("gitsigns").nav_hunk("prev")
+						gitsigns.nav_hunk("prev")
 					end
 				end,
 				desc = "git: jump to previous [c]hange",
 			},
 
 			-- hunk actions
+			{ "<leader>hs", kgitsigns.stage_hunk(), desc = "git: [s]tage hunk" },
+			{ "<leader>hr", kgitsigns.reset_hunk(), desc = "git: [r]eset hunk" },
+
 			{
 				"<leader>hs",
 				function()
-					require("gitsigns").stage_hunk()
-				end,
-				desc = "git: [s]tage hunk",
-			},
-			{
-				"<leader>hs",
-				function()
-					require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end,
 				mode = "v",
 				desc = "git: [s]tage hunk",
@@ -96,34 +63,15 @@ return {
 			{
 				"<leader>hr",
 				function()
-					require("gitsigns").reset_hunk()
-				end,
-				desc = "git: [r]eset hunk",
-			},
-			{
-				"<leader>hr",
-				function()
-					require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end,
 				mode = "v",
 				desc = "git: [r]eset hunk",
 			},
 
 			-- buffer actions
-			{
-				"<leader>hS",
-				function()
-					require("gitsigns").stage_buffer()
-				end,
-				desc = "git: [S]tage buffer",
-			},
-			{
-				"<leader>hR",
-				function()
-					require("gitsigns").stage_buffer()
-				end,
-				desc = "git: [R]eset buffer",
-			},
+			{ "<leader>hS", kgitsigns.stage_buffer(), desc = "git: [S]tage buffer" },
+			{ "<leader>hR", kgitsigns.reset_buffer(), desc = "git: [R]eset buffer" },
 		},
 
 		version = "*",

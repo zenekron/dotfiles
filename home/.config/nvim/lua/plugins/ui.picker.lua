@@ -1,3 +1,7 @@
+local util = require("util")
+
+local ktbuiltin = util.requirek("telescope.builtin")
+
 ---@module "lazy"
 ---@type LazyPluginSpec[]
 return {
@@ -76,34 +80,10 @@ return {
 
 		cmd = "Telescope",
 		keys = {
-			{
-				"<leader>fo",
-				function()
-					require("telescope.builtin").find_files()
-				end,
-				desc = "Find files",
-			},
-			{
-				"<leader>fg",
-				function()
-					require("telescope.builtin").live_grep()
-				end,
-				desc = "Find files (grep)",
-			},
-			{
-				"<leader>fb",
-				function()
-					require("telescope.builtin").buffers()
-				end,
-				desc = "Find buffers",
-			},
-			{
-				"<leader>fr",
-				function()
-					require("telescope.builtin").resume()
-				end,
-				desc = "Picker | Resume",
-			},
+			{ "<leader>fo", ktbuiltin.find_files(), desc = "Find files" },
+			{ "<leader>fg", ktbuiltin.live_grep(), desc = "Find files (grep)" },
+			{ "<leader>fb", ktbuiltin.buffers(), desc = "Find buffers" },
+			{ "<leader>fr", ktbuiltin.resume(), desc = "Picker | Resume" },
 		},
 
 		version = "*",
