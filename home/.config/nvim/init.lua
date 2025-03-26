@@ -12,7 +12,7 @@ vim.g.nerd_font = true
 ---@type nil | "blink" | "cmp"
 vim.g.complete = "blink"
 ---@type nil | "luasnip"
-vim.g.snippet = "luasnip"
+vim.g.snippet = nil
 ---@type nil | "conform"
 vim.g.format = "conform"
 ---@type nil | "lint"

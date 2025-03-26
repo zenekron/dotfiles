@@ -198,8 +198,8 @@ return {
 					preset = "none",
 
 					["<c-space>"] = { "show", "fallback" },
-					["<tab>"] = { "select_next", "fallback" },
-					["<s-tab>"] = { "select_prev", "fallback" },
+					["<tab>"] = { "select_next", "snippet_forward", "fallback" },
+					["<s-tab>"] = { "select_prev", "snippet_backward", "fallback" },
 					["<c-e>"] = { "hide", "fallback" },
 					["<cr>"] = { "accept", "fallback" },
 
