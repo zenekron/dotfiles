@@ -1,5 +1,3 @@
-local util = require("util")
-
 ---@module "lazy"
 ---@type LazyPluginSpec[]
 return {
@@ -12,7 +10,7 @@ return {
 		priority = 1000,
 
 		init = function()
-			if util.starts_with(vim.g.colorscheme, "catppuccin") then
+			if vim.startswith(vim.g.colorscheme, "catppuccin") then
 				vim.cmd.colorscheme(vim.g.colorscheme)
 			end
 		end,
@@ -29,7 +27,7 @@ return {
 		priority = 1000,
 
 		init = function()
-			if util.starts_with(vim.g.colorscheme, "tokyonight") then
+			if vim.startswith(vim.g.colorscheme, "tokyonight") then
 				vim.cmd.colorscheme(vim.g.colorscheme)
 			end
 		end,
