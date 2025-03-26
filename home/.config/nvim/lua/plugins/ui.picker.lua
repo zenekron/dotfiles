@@ -81,7 +81,6 @@ return {
 				function()
 					require("telescope.builtin").find_files()
 				end,
-				"n",
 				desc = "Find files",
 			},
 			{
@@ -89,7 +88,6 @@ return {
 				function()
 					require("telescope.builtin").live_grep()
 				end,
-				"n",
 				desc = "Find files (grep)",
 			},
 			{
@@ -97,7 +95,6 @@ return {
 				function()
 					require("telescope.builtin").buffers()
 				end,
-				"n",
 				desc = "Find buffers",
 			},
 			{
@@ -105,7 +102,6 @@ return {
 				function()
 					require("telescope.builtin").resume()
 				end,
-				"n",
 				desc = "Picker | Resume",
 			},
 		},

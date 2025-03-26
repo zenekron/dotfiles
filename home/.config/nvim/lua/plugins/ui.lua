@@ -48,7 +48,6 @@ return {
 					trouble.close()
 					trouble.open({ mode = "diagnostics" })
 				end,
-				"n",
 			},
 
 			-- goto
@@ -59,7 +58,6 @@ return {
 					trouble.close()
 					trouble.open({ mode = "lsp_definitions" })
 				end,
-				"n",
 			},
 			{
 				"gD",
@@ -68,7 +66,6 @@ return {
 					trouble.close()
 					trouble.open({ mode = "lsp_declarations" })
 				end,
-				"n",
 			},
 			{
 				"gy",
@@ -77,7 +74,6 @@ return {
 					trouble.close()
 					trouble.open({ mode = "lsp_type_definitions" })
 				end,
-				"n",
 			},
 			{
 				"gr",
@@ -86,7 +82,6 @@ return {
 					trouble.close()
 					trouble.open({ mode = "lsp_references", new = false })
 				end,
-				"n",
 			},
 			{
 				"gi",
@@ -95,7 +90,6 @@ return {
 					trouble.close()
 					trouble.open({ mode = "lsp_implementations" })
 				end,
-				"n",
 			},
 		},
 

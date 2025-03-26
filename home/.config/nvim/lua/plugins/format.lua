@@ -57,7 +57,6 @@ return {
 				function()
 					require("conform").format({ async = true })
 				end,
-				"n",
 				desc = "Format",
 			},
 		},
