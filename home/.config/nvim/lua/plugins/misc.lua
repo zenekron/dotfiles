@@ -18,7 +18,7 @@ return {
 			-- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
 			["mini.surround"] = {
 				mappings = {
-					add = "S",
+					add = "as",
 					delete = "ds",
 					replace = "cs",
 
