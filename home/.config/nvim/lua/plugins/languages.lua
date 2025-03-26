@@ -8,7 +8,7 @@ return {
 
 		---@module "nvim-treesitter"
 		---@type TSConfig
-		---@diagnostic disable-next-line missing-fields
+		---@diagnostic disable-next-line: missing-fields
 		opts = {
 			ensure_installed = {
 				"cmake",
