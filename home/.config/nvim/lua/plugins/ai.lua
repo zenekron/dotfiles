@@ -72,6 +72,10 @@ return {
 			cursor_applying_provider = "ollama", -- cursor planning mode
 
 			mappings = {
+				files = {
+					add_current = "<leader>Ac",
+				},
+
 				suggestion = {
 					accept = "<A-L>",
 					next = "<A-]>",
