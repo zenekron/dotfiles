@@ -4,10 +4,16 @@
 [delta]
 	navigate = true
 	line-numbers = true
-	; TODO:
-	; file-style = yellow bold
-	; file-decoration-style = yellow bold ol ul
-	; hunk-header-style = omit
+
+	file-decoration-style = bold ul ol
+	file-added-label = " "
+	file-copied-label = " "
+	file-modified-label = " "
+	file-removed-label = " "
+	file-renamed-label = " "
+
+	hunk-header-style = line-number file syntax
+	hunk-header-decoration-style =
 
 [interactive]
 	diffFilter = delta --color-only
