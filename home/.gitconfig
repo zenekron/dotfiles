@@ -8,6 +8,9 @@
 	name = zenekron
 	email = zenekron@gmail.com
 
+[include]
+	path = ~/.config/delta.gitconfig
+
 ; catppuccin/delta
 ; https://github.com/catppuccin/delta
 [include]
@@ -15,17 +18,3 @@
 
 [delta]
 	features = catppuccin-frappe
-
-; delta
-; https://github.com/dandavison/delta
-[core]
-	pager = delta
-
-[delta]
-	navigate = true
-
-[interactive]
-	diffFilter = delta --color-only
-
-[merge]
-	conflictstyle = zdiff3

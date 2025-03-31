@@ -1,0 +1,18 @@
+[core]
+	pager = delta
+
+[delta]
+	navigate = true
+	line-numbers = true
+	; TODO:
+	; file-style = yellow bold
+	; file-decoration-style = yellow bold ol ul
+	; hunk-header-style = omit
+
+[interactive]
+	diffFilter = delta --color-only
+
+[merge]
+	conflictstyle = zdiff3
+
+# vim: ft=gitconfig
