@@ -76,6 +76,14 @@ return {
 	{
 		"mg979/vim-visual-multi",
 
+		init = function()
+			-- fixes an issue where entering multi-cursor mode would break blink
+			-- https://github.com/Saghen/blink.cmp/issues/406
+			vim.g.VM_maps = vim.tbl_extend("force", vim.g.VM_maps or {}, {
+				["I Return"] = "<s-cr>",
+			})
+		end,
+
 		version = false,
 	},
 
