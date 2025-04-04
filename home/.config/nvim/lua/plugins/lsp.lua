@@ -41,6 +41,8 @@ return {
 			local powershell_es = {}
 			if vim.fn.executable("powershell-editor-services") == 1 then
 				powershell_es.cmd = { "powershell-editor-services", "-Stdio" }
+			elseif vim.fn.filereadable("/opt/powershell-editor-services") then
+				powershell_es.bundle_path = "/opt/powershell-editor-services"
 			end
 
 			return {
