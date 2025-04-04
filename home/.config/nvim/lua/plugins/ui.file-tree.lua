@@ -40,7 +40,7 @@ return {
 				on_attach = on_attach,
 
 				view = {
-					width = {},
+					width = { max = 40 },
 				},
 
 				update_focused_file = {
