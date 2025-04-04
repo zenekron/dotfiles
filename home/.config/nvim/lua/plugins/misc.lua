@@ -30,6 +30,8 @@ return {
 					suffix_last = "", -- Suffix to search with "prev" method
 					suffix_next = "", -- Suffix to search with "next" method}
 				},
+
+				n_lines = 200,
 			},
 		},
 		config = function(_, opts)
