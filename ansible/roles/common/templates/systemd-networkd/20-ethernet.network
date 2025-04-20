@@ -1,0 +1,27 @@
+[Match]
+Kind=!*
+Type=ether
+
+[Network]
+{% if network.ipv4 and network.ipv6 %}
+DHCP=yes
+LinkLocalAddressing=yes
+{% elif network.ipv4 %}
+DHCP=ipv4
+LinkLocalAddressing=ipv4
+{% elif network.ipv6 %}
+DHCP=ipv6
+LinkLocalAddressing=ipv6
+{% else %}
+DHCP=no
+LinkLocalAddressing=no
+{% endif %}
+
+{% if not network.ipv6 %}
+# disable IPv6 router advertisements (otherwise the interface may get stuck at configuring)
+IPv6AcceptRA=no
+{% endif %}
+
+{% if network.multicast_dns %}
+MulticastDNS=yes
+{% endif %}

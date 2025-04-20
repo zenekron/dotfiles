@@ -2,3 +2,17 @@ control:
   hosts:
     localhost:
       ansible_connection: local
+  vars:
+    time:
+      timezone: "Europe/Rome"
+    localization:
+      locale: "en_US.UTF-8"
+      keymap: "us"
+    network:
+      hostname: "beelzebub"
+      ipv4: true
+      ipv6: false
+      multicast_dns: true
+    boot:
+      root_partition: "b397ae0d-f4c7-4a03-9eaa-8aae3fea467f"
+

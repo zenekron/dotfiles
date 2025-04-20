@@ -1,0 +1,6 @@
+- name: Control
+  hosts: control
+  roles:
+    - common
+
+# vim: ft=yaml.ansible
