@@ -52,11 +52,14 @@ return {
 				buf_ls = {},
 				clangd = {},
 				cssls = {},
+				dartls = {},
 				emmet_language_server = {},
 				gopls = {},
 				html = {},
 				jsonls = jsonls,
 				lua_ls = {},
+				neocmake = {},
+				nil_ls = {},
 				nixd = {},
 				powershell_es = powershell_es,
 				pyright = {},
@@ -71,7 +74,8 @@ return {
 			-- determine capabilities
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			if vim.g.complete == "cmp" then
-				capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+				capabilities =
+					vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 			end
 
 			-- configure servers
