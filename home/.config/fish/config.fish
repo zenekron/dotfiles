@@ -10,7 +10,7 @@ if type -q direnv; direnv hook fish | source; end
 if type -q starship; starship init fish | source; end
 
 # update path
-fish_add_path "$HOME/.dotfiles/bin"
+fish_add_path --path "$HOME/.dotfiles/bin"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
