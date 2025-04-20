@@ -105,7 +105,7 @@ return {
 				endpoint = "http://astaroth.local:11434",
 				stream = true, -- "ollama" impl requires "stream = true"
 
-				model = "qwen2.5-coder:14b",
+				model = "qwen2.5-coder:7b",
 				options = {
 					num_ctx = 32768,
 					temperature = 0,
@@ -115,6 +115,7 @@ return {
 				-- model = "codellama:7b"
 				-- model = "deepseek-coder-v2:16b"
 				-- model = "qwen2.5-coder:7b"
+				-- model = "qwen2.5-coder:14b"
 				-- model = "wizardlm2:7b"
 			},
 		},
