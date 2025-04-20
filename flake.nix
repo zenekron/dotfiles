@@ -15,6 +15,11 @@
       in {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
+            # ansible
+            ansible
+            ansible-language-server
+            ansible-lint
+
             # nix
             alejandra
             nil
