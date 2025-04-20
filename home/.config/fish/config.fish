@@ -4,6 +4,11 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x XDG_DATA_HOME "$HOME/.local/share"
 set -x XDG_STATE_HOME "$HOME/.local/state"
 
+# https://github.com/direnv/direnv
+if type -q direnv; direnv hook fish | source; end
+# https://github.com/starship/starship
+if type -q starship; starship init fish | source; end
+
 # update path
 fish_add_path "$HOME/.dotfiles/bin"
 
