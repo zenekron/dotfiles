@@ -9,4 +9,43 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+# c/c++
+[*.{h,hh,hpp,hxx,c,cc,cpp,cxx,mpp,mxx}]
+indent_style = space
+indent_size = 2
+
+# cmake
+[{CMakeLists.txt,*.cmake}]
+indent_style = space
+
+# dart
+[*.{dart}]
+indent_style = space
+indent_size = 2
+
+# json
+[*.{json,jsonc}]
+indent_style = space
+indent_size = 2
+
+# kotlin
+[*.{kt,kts}]
+indent_style = space
+indent_size = 4
+
+# nix
+[*.nix]
+indent_style = space
+indent_size = 2
+
+# typescript
+[*.{ts,mts,cts}]
+indent_style = space
+indent_size = 2
+
+# yaml
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
 # vim: commentstring=#\ %s
