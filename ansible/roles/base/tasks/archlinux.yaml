@@ -128,4 +128,11 @@
     reason_for: all
     state: present
 
+- name: Install paru-bin
+  ansible.builtin.include_role:
+    name: aur
+  vars:
+    aur_name: paru-bin
+    aur_reason: explicit
+
 # vim: ft=yaml.ansible

@@ -1,0 +1,53 @@
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: "pacman"
+
+- when: "aur_name not in ansible_facts.packages" # noqa: name[missing]
+  block:
+    - name: Retrieve package details
+      register: aur_details
+      ansible.builtin.uri:
+        method: "GET"
+        url: "https://aur.archlinux.org/rpc/v5/info/{{ aur_name }}"
+
+    - name: Check package details
+      when: "('skipped' not in aur_details) or (not aur_details.skipped)"
+      ansible.builtin.assert:
+        that:
+          - "aur_details.json.resultcount == 1"
+          - "'URLPath' in aur_details.json.results[0]"
+
+    - name: Create temp directory
+      register: aur_tempfile
+      ansible.builtin.tempfile:
+        state: directory
+        prefix: "ansible.aur.{{ aur_name }}."
+
+    - name: Download package
+      when: "('skipped' not in aur_tempfile) or (not aur_tempfile.skipped)"
+      register: aur_download
+      notify:
+        - Build package
+        - Install package
+      ansible.builtin.unarchive:
+        src: "https://aur.archlinux.org/{{ aur_details.json.results[0].URLPath }}"
+        dest: "{{ aur_tempfile.path }}"
+        remote_src: true
+
+    - name: Build package # noqa: no-changed-when no-handler
+      when: "aur_download.changed"
+      ansible.builtin.command:
+        chdir: "{{ aur_tempfile.path }}/{{ aur_name }}"
+        cmd: makepkg --syncdeps --noconfirm --needed
+
+    - name: Install package # noqa: no-changed-when no-handler
+      when: "aur_download.changed"
+      become: true
+      with_fileglob: "{{ aur_tempfile.path }}/{{ aur_name }}/{{ aur_name }}-*.pkg.*"
+      community.general.pacman:
+        name: "{{ item }}"
+        state: present
+        reason: "{{ aur_reason }}"
+        reason_for: all
+
+# vim: ft=yaml.ansible
