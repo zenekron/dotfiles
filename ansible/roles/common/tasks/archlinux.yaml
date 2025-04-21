@@ -10,21 +10,26 @@
 
       # cli
       - 7zip
-      - bat
-      - fd
       - fzf
       - git-delta
+      - hyperfine # a command-line benchmarking tool
       - jq
       - openssh
-      - ripgrep
-      - sd
       - tealdeer
+      - watchexec # executes commands in response to file modifications
       - wget
-      - zellij
+
+      # cli.replacements
+      - bat # cat replacement
+      - eza # ls replacement
+      - fd # find replacement
+      - ripgrep # grep replacement
+      - sd # sed replacement
+      - zellij # tmux replacement
+      - procs # ps
 
       # audio
       - pipewire
-      - pipewire-jack
 
       # fonts
       - noto-fonts
@@ -42,6 +47,7 @@
 
       # development
       - docker
+      - docker-compose
       - neovim
       - typescript-language-server
       - vscode-json-languageserver
@@ -57,6 +63,23 @@
       - shfmt
 
     reason: explicit
+    reason_for: all
+    state: present
+
+- name: Install package dependencies
+  become: true
+  community.general.pacman:
+    name:
+      # audio.pipewire
+      - pipewire-alsa
+      - pipewire-docs
+      - pipewire-jack
+      - pipewire-pulse
+
+      # development.docker
+      - docker-buildx
+
+    reason: dependency
     reason_for: all
     state: present
 
