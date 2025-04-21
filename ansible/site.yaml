@@ -1,7 +1,7 @@
 - name: Control
   hosts: control
   roles:
-    - common
+    - base
     - nix
     - role: vmware-guest
       when: ansible_facts['virtualization_type']|lower == 'vmware'
