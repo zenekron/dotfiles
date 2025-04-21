@@ -1,0 +1,62 @@
+- name: Install packages
+  become: true
+  community.general.pacman:
+    name:
+      # shell
+      - direnv
+      - fish
+      - fisher
+      - starship
+
+      # cli
+      - 7zip
+      - bat
+      - fd
+      - fzf
+      - git-delta
+      - jq
+      - openssh
+      - ripgrep
+      - sd
+      - tealdeer
+      - wget
+      - zellij
+
+      # audio
+      - pipewire
+      - pipewire-jack
+
+      # fonts
+      - noto-fonts
+      - ttf-jetbrains-mono-nerd
+
+      # graphical
+      - firefox
+      - udiskie
+
+      # wayland
+      - sway
+      - waybar
+      - wl-clipboard
+      - wofi
+
+      # development
+      - neovim
+      - typescript-language-server
+      - vscode-json-languageserver
+
+      # development/lua
+      - lua51 # required by lazy.nvim
+      - luarocks # required by lazy.nvim
+      - stylua
+
+      # development/shell
+      - bash-language-server
+      - shellcheck
+      - shfmt
+
+    reason: explicit
+    reason_for: all
+    state: present
+
+# vim: ft=yaml.ansible
