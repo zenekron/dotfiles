@@ -41,6 +41,7 @@
       - wofi
 
       # development
+      - docker
       - neovim
       - typescript-language-server
       - vscode-json-languageserver
@@ -58,5 +59,14 @@
     reason: explicit
     reason_for: all
     state: present
+
+- name: Enable services
+  become: true
+  with_items:
+    - docker.socket
+  builtin.ansible.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
 
 # vim: ft=yaml.ansible
