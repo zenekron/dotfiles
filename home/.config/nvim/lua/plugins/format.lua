@@ -37,7 +37,7 @@ return {
 					lua = { "stylua" },
 					markdown = prettier,
 					nix = { "alejandra" },
-					python = { "black" },
+					python = { "ruff_organize_imports", "ruff_format" },
 					scss = prettier,
 					typescript = prettier,
 					typescriptreact = prettier,

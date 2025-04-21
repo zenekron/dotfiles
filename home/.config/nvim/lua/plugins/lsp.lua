@@ -47,6 +47,7 @@ return {
 
 			return {
 				ansiblels = {},
+				basedpyright = {},
 				bashls = {},
 				biome = {},
 				buf_ls = {},
@@ -62,7 +63,6 @@ return {
 				nil_ls = {},
 				nixd = {},
 				powershell_es = powershell_es,
-				pylsp = {},
 				svelte = {},
 				ts_ls = {},
 				yamlls = yamlls,

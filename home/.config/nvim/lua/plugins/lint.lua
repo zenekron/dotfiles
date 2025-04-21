@@ -24,6 +24,7 @@ return {
 			return {
 				javascript = typescript,
 				javascriptreact = typescript,
+				python = { "ruff" },
 				typescript = typescript,
 				typescriptreact = typescript,
 			}
