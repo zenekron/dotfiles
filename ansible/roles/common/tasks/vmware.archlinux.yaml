@@ -1,0 +1,27 @@
+- name: Install guest utils
+  community.general.pacman:
+    name: open-vm-tools
+    reason: explicit
+    reason_for: all
+    state: present
+  become: true
+
+- name: Enable services
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    - vmtoolsd.service
+    - vmware-vmblock-fuse.service
+  become: true
+
+- name: Install `vmware-shared-folder@.service`
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/vmware-shared-folder@.service
+    src: vmware/vmware-shared-folder@.service
+    mode: u=rw,g=r,o=r
+
+  become: true
+
+# vim: ft=yaml.ansible
