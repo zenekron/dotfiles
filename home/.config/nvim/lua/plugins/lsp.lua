@@ -62,7 +62,7 @@ return {
 				nil_ls = {},
 				nixd = {},
 				powershell_es = powershell_es,
-				pyright = {},
+				pylsp = {},
 				svelte = {},
 				ts_ls = {},
 				yamlls = yamlls,
