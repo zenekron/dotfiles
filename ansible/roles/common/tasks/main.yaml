@@ -1,6 +1,5 @@
-- name: Arch Linux
-  when: ansible_facts['os_family']|lower == 'archlinux'
-  ansible.builtin.import_tasks: ./archlinux.yaml
+- name: Base
+  ansible.builtin.import_tasks: ./base.yaml
 
 - name: VMWare
   when: ansible_facts['virtualization_type']|lower == 'vmware'

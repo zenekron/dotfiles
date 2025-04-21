@@ -1,0 +1,5 @@
+- name: Arch Linux
+  when: ansible_facts['os_family']|lower == 'archlinux'
+  ansible.builtin.import_tasks: ./base.archlinux.yaml
+
+# vim: ft=yaml.ansible
