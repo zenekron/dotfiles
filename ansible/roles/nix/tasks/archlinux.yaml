@@ -1,0 +1,20 @@
+# https://wiki.archlinux.org/title/Nix
+
+- name: All
+  become: true
+  block:
+    - name: Install packages
+      community.general.pacman:
+        name:
+          - nix
+        reason: explicit
+        reason_for: all
+        state: present
+
+    - name: Enable services
+      ansible.builtin.service:
+        name: nix-daemon.service
+        state: started
+        enabled: true
+
+# vim: ft=yaml.ansible
