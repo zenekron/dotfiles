@@ -31,12 +31,15 @@ indent_size = 2
 # kotlin
 [*.{kt,kts}]
 indent_style = space
-indent_size = 4
 
 # nix
 [*.nix]
 indent_style = space
 indent_size = 2
+
+# python
+[*.py]
+indent_style = space
 
 # typescript
 [*.{ts,mts,cts}]
