@@ -25,6 +25,12 @@
             # nix
             alejandra
             nil
+
+            # python
+            basedpyright
+            python312Packages.pydantic
+            python312Packages.pytest
+            ruff
           ];
         };
       }
