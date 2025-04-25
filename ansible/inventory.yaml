@@ -227,7 +227,7 @@ control:
       - foot
       - thunderbird
       - vlc
-      - pacakges: # file manager
+      - packges: # file manager
           - nemo
           - nemo-share
 
