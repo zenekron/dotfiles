@@ -1,0 +1,4 @@
+# vim: ft=yaml.ansible
+
+paru_user_name: "paru"
+paru_packages: []

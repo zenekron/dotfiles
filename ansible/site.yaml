@@ -1,9 +1,7 @@
+# vim: ft=yaml.ansible
+
 - name: Control
   hosts: control
   roles:
     - base
-    - nix
-    - role: vmware-guest
-      when: ansible_facts['virtualization_type']|lower == 'vmware'
-
-# vim: ft=yaml.ansible
+    - common

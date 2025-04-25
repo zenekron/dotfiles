@@ -1,3 +1,10 @@
+# vim: ft=yaml.ansible
+
+#
+# vars:
+#   aur_name: The name of the AUR package to install.
+#
+
 - name: Gather package facts
   ansible.builtin.package_facts:
     manager: "pacman"
@@ -11,7 +18,7 @@
         url: "https://aur.archlinux.org/rpc/v5/info/{{ aur_name }}"
 
     - name: Check package details
-      when: "('skipped' not in aur_details) or (not aur_details.skipped)"
+      when: "aur_details is not skipped"
       ansible.builtin.assert:
         that:
           - "aur_details.json.resultcount == 1"
@@ -24,11 +31,8 @@
         prefix: "ansible.aur.{{ aur_name }}."
 
     - name: Download package
-      when: "('skipped' not in aur_tempfile) or (not aur_tempfile.skipped)"
+      when: "aur_tempfile is not skipped"
       register: aur_download
-      notify:
-        - Build package
-        - Install package
       ansible.builtin.unarchive:
         src: "https://aur.archlinux.org/{{ aur_details.json.results[0].URLPath }}"
         dest: "{{ aur_tempfile.path }}"
@@ -49,5 +53,3 @@
         state: present
         reason: "{{ aur_reason }}"
         reason_for: all
-
-# vim: ft=yaml.ansible

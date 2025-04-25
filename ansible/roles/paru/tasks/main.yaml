@@ -1,0 +1,70 @@
+# vim: ft=yaml.ansible
+
+#
+# vars:
+#   paru_user_name: The name of the AUR package to install, defaults to "paru".
+#   paru_packages: List of packages to install.
+#
+
+#
+# create user
+#
+
+- name: Create paru user
+  become: true
+  register: paru_user
+  ansible.builtin.user:
+    name: "{{ paru_user_name }}"
+    system: true
+
+- name: Authorize ansible user
+  become: true
+  community.general.sudoers:
+    name: "90-ansible-{{ paru_user.name }}"
+    user: "{{ paru_user.name }}"
+    commands:
+      - /usr/bin/pacman
+      - /usr/bin/paru
+    nopassword: true
+
+#
+# retrieve list of installed packages
+#
+
+- name: Get list of explicitly installed packages # noqa: no-changed-when
+  check_mode: false # run in check mode
+  register: paru_query
+  ansible.builtin.command:
+    cmd: paru --query --explicit
+
+- name: Parse list of explicitly installed packages
+  ansible.builtin.set_fact:
+    packages_installed: "{{ paru_query.stdout_lines | map('regex_replace', '^(\\S+)\\s.+$', '\\1') }}"
+
+#
+# sync package list
+#
+
+- name: Remove extra packages
+  become: true
+  become_user: "{{ paru_user.name }}"
+  community.general.pacman:
+    state: absent
+    name: "{{ packages_installed | difference(paru_packages) }}"
+
+- name: Install missing packages # noqa: no-changed-when
+  when: "paru_packages | difference(packages_installed) | length > 0"
+  become: true
+  become_user: "{{ paru_user.name }}"
+  ansible.builtin.command:
+    argv: "{{ ['paru', '--sync', '--needed', '--noconfirm', '--noprogressbar', '--'] + (paru_packages | difference(packages_installed)) }}"
+
+- name: Ensure packages are marked as explicit # noqa: no-changed-when
+  when: "paru_packages | length > 0"
+  become: true
+  become_user: "{{ paru_user.name }}"
+  community.general.pacman:
+    state: present
+    reason: explicit
+    reason_for: all
+    name: "{{ paru_packages }}"

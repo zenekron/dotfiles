@@ -1,0 +1,230 @@
+# vim: ft=yaml.ansible
+
+common_packages:
+  # base
+  - packages:
+      - base
+      - base-devel
+      - linux
+      - linux-firmware
+      # - linux-lts
+      # - linux-lts-docs
+      # - linux-lts-headers
+
+  # documentation
+  - packages:
+      - man-db
+      - man-pages
+      - texinfo
+
+  # package management
+  - paru-bin
+  - paru-bin-debug
+  - packages:
+      - reflector
+    services:
+      - reflector.timer
+
+  # vmware
+  - when: "{{ ansible_facts['virtualization_type'] | lower == 'vmware' }}"
+    packages:
+      - open-vm-tools
+      # - xf86-input-vmmouse
+      # - xf86-video-vmware
+    services:
+      - vmtoolsd.service
+      - vmware-vmblock-fuse.service
+
+  #
+  # shell
+  #
+  - direnv
+  - starship
+
+  ## shell.fish
+  - fish
+  - fisher
+
+  #
+  # cli
+  #
+  - 7zip
+  - bc # calculator
+  - fzf
+  - gptfdisk # gtp partitioning tool
+  - hyperfine # a command-line benchmarking tool
+  - ipcalc
+  - jq
+  - openssh
+  - ranger # tui file manager
+  - renameutils
+  - rsync
+  - tealdeer
+  - ventoy-bin
+  - watchexec # executes commands in response to file modifications
+  - wget
+
+  ## cli.replacements
+  - bottom # top replacement
+  - duf # df replacement
+  - dust # du replacement
+  - eza # ls replacement
+  - fd # find replacement
+  - gping # ping replacement
+  - procs # ps
+  - ripgrep # grep replacement
+  - sd # sed replacement
+  - zellij # tmux replacement
+
+  - packages: # cat replacement
+      - bat
+
+  #
+  # development
+  #
+
+  ## development.cli
+  - git
+  - git-cliff
+  - git-delta
+  - git-lfs
+  - mitmproxy # man-in-the-middle HTTP(S) proxy
+  - packages:
+      - nix
+    services:
+      - nix-daemon.service
+
+  ## development.gui
+  - lunacy-bin # free ui/ux design software
+  - insomnia-bin # api client and design platform for graphql and rest
+
+  ## development.editor.neovim
+  - lua51 # required by lazy.nvim
+  - luarocks # required by lazy.nvim
+  - neovim
+
+  ## development.virtualization.docker
+  - dive # tool for exploring layers in docker images
+  - packages:
+      - docker
+      - docker-buildx
+      - docker-compose
+    services:
+      - docker.socket
+
+  ## development.virtualization.kubernetes
+  - helm
+  - k9s
+  - kubectl
+
+  ## development.language.native
+  - codelldb-bin # debugger extension for vscode based on lldb
+  - lldb
+  - mold # a modern linker
+  - sccache # compilation cache
+  - valgrind # memory checker
+
+  ## development.language.c/c++
+  - cppcheck
+  - include-what-you-use
+  - ninja
+  - python-cpplint
+
+  ## development.language.cmake
+  - cmake
+  - cmake-format
+  - neocmakelsp
+
+  ## development.language.java
+  - jdtls
+  - packages:
+      - jdk-openjdk
+      - openjdk-doc
+  - packages:
+      - jdk21-openjdk
+      - openjdk21-doc
+  - packages:
+      - gradle
+      - gradle-doc
+      - gradle-src
+
+  ## development.language.javascript/typescript
+  - prettier
+  - typescript-language-server
+
+  ## development.language.lua
+  - vscode-json-languageserver
+
+  ## development.language.lua
+  - lua-language-server
+  - stylua
+
+  ## development.language.powershell
+  - powershell-bin
+  - powershell-editor-services
+
+  ## development.language.shell
+  - bash-language-server
+  - shellcheck
+  - shfmt
+
+  ## development.language.rust
+  - rustup
+  # - cargo-edit
+  # - cargo-expand
+  # - cargo-feature
+  # - cargo-generate
+  # - cargo-msrv
+  # - cargo-outdated
+  # - cargo-release
+  # - cargo-tauri
+  # - cargo-udeps
+  # - cargo-update
+  # - cargo-watch
+  # - cross
+  # - rust-analyzer
+  # - wasm-bindgen
+  # - wasm-pack
+
+  #
+  # graphical
+  #
+
+  ## graphical.audio
+  - pipewire
+  - pipewire-alsa
+  - pipewire-audio
+  - pipewire-docs
+  - pipewire-jack
+  - pipewire-pulse
+  - wireplumber
+
+  ## graphical.fonts
+  - noto-fonts
+  - ttf-firacode-nerd
+  - ttf-jetbrains-mono-nerd
+
+  ## graphical.programs
+  - firefox
+  - foot
+  - thunderbird
+  - vlc
+  - pacakges: # file manager
+      - nemo
+      - nemo-share
+
+  ## graphical.tray
+  - udiskie
+
+  ## graphical.wayland
+  - grim # screenshot utility
+  - slurp # region selection
+  - waybar # status bar
+  - wl-clipboard # clipboard
+  - wofi # application launcher
+  - xorg-xwayland
+
+  ## graphical.wayland.sway
+  - sway
+  - swaybg
+  - swaylock

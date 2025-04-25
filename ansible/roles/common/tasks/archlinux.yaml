@@ -1,95 +1,32 @@
-- name: Install packages
+# vim: ft=yaml.ansible
+
+- name: Parse packages var
+  ansible.builtin.set_fact:
+    packages: "{{ common_packages | from_packages }}"
+
+- name: Install paru-bin
+  vars:
+    aur_name: paru-bin
+  ansible.builtin.include_role:
+    name: aur
+
+- name: Sync packages
+  vars:
+    paru_packages: "{{ packages.packages }}"
+  ansible.builtin.include_role:
+    name: paru
+
+- name: Activate services
   become: true
-  community.general.pacman:
-    name:
-      # shell
-      - direnv
-      - fish
-      - fisher
-      - starship
-
-      # cli
-      - 7zip
-      - fzf
-      - git-delta
-      - hyperfine # a command-line benchmarking tool
-      - jq
-      - openssh
-      - tealdeer
-      - watchexec # executes commands in response to file modifications
-      - wget
-
-      # cli.replacements
-      - bat # cat replacement
-      - eza # ls replacement
-      - fd # find replacement
-      - ripgrep # grep replacement
-      - sd # sed replacement
-      - zellij # tmux replacement
-      - procs # ps
-
-      # audio
-      - pipewire
-
-      # fonts
-      - noto-fonts
-      - ttf-jetbrains-mono-nerd
-
-      # graphical
-      - firefox
-      - udiskie
-
-      # wayland
-      - sway
-      - waybar
-      - wl-clipboard
-      - wofi
-
-      # development
-      - docker
-      - docker-compose
-      - neovim
-      - typescript-language-server
-      - vscode-json-languageserver
-
-      # development/lua
-      - lua51 # required by lazy.nvim
-      - luarocks # required by lazy.nvim
-      - stylua
-
-      # development/shell
-      - bash-language-server
-      - shellcheck
-      - shfmt
-
-    reason: explicit
-    reason_for: all
-    state: present
-
-- name: Install package dependencies
-  become: true
-  community.general.pacman:
-    name:
-      # audio.pipewire
-      - pipewire-alsa
-      - pipewire-docs
-      - pipewire-jack
-      - pipewire-pulse
-
-      # development.docker
-      - docker-buildx
-
-    reason: dependency
-    reason_for: all
-    state: present
-
-- name: Enable services
-  become: true
-  with_items:
-    - docker.socket
-  builtin.ansible.service:
+  with_items: "{{ packages.services }}"
+  ansible.builtin.service:
     name: "{{ item }}"
     state: started
     enabled: true
 
-# vim: ft=yaml.ansible
+- name: Install `vmware-shared-folder@.service`
+  when: "ansible_facts['virtualization_type'] | lower == 'vmware'"
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/vmware-shared-folder@.service
+    src: vmware-shared-folder@.service
+    mode: u=rw,g=r,o=r
