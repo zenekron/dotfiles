@@ -118,7 +118,7 @@
 
 - name: Parse packages var
   ansible.builtin.set_fact:
-    packages: "{{ common_packages | from_packages }}"
+    packages: "{{ packages | from_packages }}"
 
 - name: Install paru-bin
   vars:
