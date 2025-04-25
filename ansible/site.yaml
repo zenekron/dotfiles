@@ -3,5 +3,4 @@
 - name: Control
   hosts: control
   roles:
-    - base
     - common

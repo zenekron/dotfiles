@@ -1,5 +1,121 @@
 # vim: ft=yaml.ansible
 
+#
+# time
+#
+
+- name: Configure time zone
+  become: true
+  ansible.builtin.file:
+    path: /etc/localtime
+    state: link
+    src: /usr/share/zoneinfo/{{ time.timezone }}
+
+- name: Enable time synchronization
+  become: true
+  ansible.builtin.service:
+    name: systemd-timesyncd.service
+    state: started
+    enabled: true
+
+#
+# localization
+#
+
+- name: Configure supported locales
+  become: true
+  register: locale_gen
+  ansible.builtin.lineinfile:
+    path: /etc/locale.gen
+    regexp: '^#?{{ localization.locale }}\s+(.+)'
+    backrefs: true
+    line: '{{ localization.locale }} \1'
+
+- name: Regenerate locales # noqa: no-changed-when no-handler
+  when: "locale_gen is changed"
+  become: true
+  ansible.builtin.command:
+    cmd: locale-gen
+
+- name: Configure locale
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/locale.conf
+    content: |
+      LANG={{ localization.locale }}
+    mode: u=rw,g=r,o=r
+
+- name: Configure console keyboard layout
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/vconsole.conf
+    content: |
+      KEYMAP={{ localization.keymap }}
+    mode: u=rw,g=r,o=r
+
+#
+# network
+#
+
+- name: Configure hostname
+  ansible.builtin.copy:
+    dest: /etc/hostname
+    content: |
+      {{ network.hostname }}
+    mode: u=rw,g=r,o=r
+
+- name: Configure networks
+  with_fileglob: "../templates/systemd-networkd/*"
+  become: true
+  ansible.builtin.template:
+    dest: /etc/systemd/network/{{ item | basename }}
+    src: "{{ item }}"
+    mode: u=rw,g=r,o=r
+
+- name: Enable network manager
+  become: true
+  ansible.builtin.service:
+    name: systemd-networkd.service
+    state: started
+    enabled: true
+
+- name: Configure DNS resolver
+  become: true
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    state: link
+    src: /run/systemd/resolve/stub-resolv.conf
+
+- name: Enable DNS resolver
+  become: true
+  ansible.builtin.service:
+    name: systemd-resolved.service
+    state: started
+    enabled: true
+
+#
+# boot loader
+#
+
+- name: Configure systemd-boot
+  become: true
+  ansible.builtin.copy:
+    dest: /boot/loader/loader.conf
+    src: ../templates/systemd-boot/loader.conf
+    mode: u=rwx,g=rx,o=rx
+
+- name: Configure systemd-boot entries
+  with_fileglob: "../templates/systemd-boot/entries/*"
+  become: true
+  ansible.builtin.template:
+    dest: /boot/loader/entries/{{ item | basename }}
+    src: "{{ item }}"
+    mode: u=rwx,g=rx,o=rx
+
+#
+# packages
+#
+
 - name: Parse packages var
   ansible.builtin.set_fact:
     packages: "{{ common_packages | from_packages }}"
